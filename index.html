@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>for my cutie ♡</title>
+
+<style> * { box-sizing: border-box; } body { margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center; font-family: "Arial", sans-serif; color: #304957; overflow: hidden; background: radial-gradient(circle at 15% 20%, rgba(255,255,255,.9) 0 45px, transparent 46px), radial-gradient(circle at 85% 75%, rgba(255,255,255,.55) 0 70px, transparent 71px), linear-gradient(135deg, #dff3ff, #c9e7f7, #e9f7ff); } /* soft background decorations */ .blob { position: fixed; border-radius: 50%; filter: blur(2px); opacity: .45; pointer-events: none; } .blob.one { width: 180px; height: 180px; background: #b5dcf1; top: -70px; left: -50px; } .blob.two { width: 230px; height: 230px; background: #f4dfe7; bottom: -100px; right: -70px; } .blob.three { width: 100px; height: 100px; background: #fff1b8; top: 18%; right: 8%; } /* floating decorations */ .decor { position: fixed; pointer-events: none; opacity: .65; animation: float 4s ease-in-out infinite; } .star1 { top: 12%; left: 13%; font-size: 20px; } .star2 { bottom: 17%; left: 10%; font-size: 16px; animation-delay: 1s; } .heart1 { top: 17%; right: 16%; font-size: 17px; animation-delay: 2s; } .heart2 { bottom: 14%; right: 12%; font-size: 22px; animation-delay: .5s; } @keyframes float { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-10px) rotate(5deg); } } /* main card */ .card { position: relative; width: min(90%, 510px); padding: 48px 32px; text-align: center; background: rgba(255,255,255,.78); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,.9); border-radius: 30px; box-shadow: 0 25px 60px rgba(67,112,136,.16); animation: appear 1s ease; } @keyframes appear { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } } /* duck */ .duck { font-size: 62px; margin-bottom: 18px; filter: drop-shadow(0 8px 5px rgba(0,0,0,.08)); animation: duckFloat 3s ease-in-out infinite; } @keyframes duckFloat { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-9px) rotate(3deg); } } /* opening */ .opening-title { font-family: Georgia, serif; font-size: 25px; font-weight: 500; line-height: 1.5; margin: 0 auto 28px; } button { border: none; background: #a9d8ee; color: #31566b; padding: 13px 23px; border-radius: 999px; font-size: 14px; font-weight: bold; cursor: pointer; transition: .25s ease; box-shadow: 0 7px 18px rgba(94,151,180,.15); } button:hover { transform: translateY(-3px); background: #9dd1e9; box-shadow: 0 10px 22px rgba(94,151,180,.22); } /* message */ .message { display: none; } .message.show { display: block; animation: reveal .8s ease; } @keyframes reveal { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } } .main-text { font-family: Georgia, serif; font-size: 25px; line-height: 1.5; color: #304957; margin: 0 auto 25px; max-width: 400px; } .miss-you { font-size: 16px; color: #718996; letter-spacing: .2px; } .heart { display: inline-block; margin-top: 18px; font-size: 25px; animation: heartbeat 1.5s ease-in-out infinite; } @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.18); } } /* tiny sparkle */ .sparkle { position: absolute; color: white; font-size: 13px; opacity: .8; } .sparkle.a { top: 22px; left: 30px; } .sparkle.b { top: 38px; right: 42px; } .sparkle.c { bottom: 28px; left: 45px; } .sparkle.d { bottom: 38px; right: 30px; } /* mobile */ @media (max-width: 600px) { .card { padding: 42px 25px; } .duck { font-size: 55px; } .main-text { font-size: 22px; } .opening-title { font-size: 23px; } } </style>
+
+</head>
+
+<body>
+
+<!-- background -->
+
+<div class="blob one"></div> <div class="blob two"></div> <div class="blob three"></div>
+
+<div class="decor star1">✦</div> <div class="decor star2">✧</div> <div class="decor heart1">♡</div> <div class="decor heart2">♡</div>
+
+<!-- main card -->
+
+<div class="card">
+
+<div class="sparkle a">✦</div> <div class="sparkle b">✧</div> <div class="sparkle c">✦</div> <div class="sparkle d">✧</div>
+
+<div class="duck"> 🐤 </div>
+
+<!-- opening -->
+
+<div id="opening">
+
+<h1 class="opening-title">
+  I have something to tell you...
+</h1>
+
+<button onclick="revealMessage()">
+  open ♡
+</button>
+
+</div>
+
+<!-- message -->
+
+<div class="message" id="message">
+
+<div class="main-text">
+  “I was going to send you something cute,
+  then I remembered you have a mirror.”
+</div>
+
+<div class="miss-you">
+  i overmiss you, my cutie baby lsr ♡
+</div>
+
+<div class="heart">
+  🫠
+</div>
+
+</div>
+
+</div>
+
+<script> function revealMessage() { document.getElementById("opening").style.display = "none"; document.getElementById("message").classList.add("show"); } </script>
+
+</body> </html>
