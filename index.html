@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Before We Meet ☁️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    color: #596b80;
+
+    background:
+        radial-gradient(circle at 88% 5%, rgba(255,225,198,.85), transparent 28%),
+        radial-gradient(circle at 8% 82%, rgba(210,229,255,.8), transparent 34%),
+        linear-gradient(145deg, #eaf7ff, #eef2ff 52%, #fff5ef);
+
+    animation: skyShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes skyShift {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 7% 5%;
+    }
+}
+
+
+/* =========================
+   SKY
+========================= */
+
+.sky {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+
+/* SUN */
+
+.sun {
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    top: -55px;
+    right: -40px;
+
+    border-radius: 50%;
+
+    background: rgba(255,218,173,.45);
+
+    box-shadow:
+        0 0 60px rgba(255,211,163,.35);
+
+    animation: sunFloat 6s ease-in-out infinite;
+}
+
+.sun::after {
+    content: "";
+
+    position: absolute;
+
+    width: 58px;
+    height: 58px;
+
+    top: 46px;
+    left: 46px;
+
+    border-radius: 50%;
+
+    background: rgba(255,222,181,.75);
+}
+
+@keyframes sunFloat {
+
+    0%,100% {
+        transform: scale(1);
+        opacity: .85;
+    }
+
+    50% {
+        transform: scale(1.04);
+        opacity: 1;
+    }
+}
+
+
+/* CLOUDS */
+
+.cloud {
+    position: absolute;
+
+    width: 115px;
+    height: 30px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.58);
+
+    filter: blur(.2px);
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.64);
+}
+
+.cloud::before {
+    width: 46px;
+    height: 46px;
+
+    left: 17px;
+    bottom: 7px;
+}
+
+.cloud::after {
+    width: 36px;
+    height: 36px;
+
+    left: 58px;
+    bottom: 4px;
+}
+
+.cloud.one {
+    top: 13%;
+    left: -140px;
+
+    animation:
+        cloudMove1 35s linear infinite;
+}
+
+.cloud.two {
+    top: 30%;
+    right: -140px;
+
+    transform: scale(.7);
+
+    opacity: .48;
+
+    animation:
+        cloudMove2 42s linear infinite;
+}
+
+.cloud.three {
+    bottom: 14%;
+    left: -130px;
+
+    transform: scale(.55);
+
+    opacity: .4;
+
+    animation:
+        cloudMove3 48s linear infinite;
+}
+
+@keyframes cloudMove1 {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(100vw + 280px));
+    }
+}
+
+@keyframes cloudMove2 {
+
+    from {
+        transform: translateX(0) scale(.7);
+    }
+
+    to {
+        transform: translateX(calc(-100vw - 280px)) scale(.7);
+    }
+}
+
+@keyframes cloudMove3 {
+
+    from {
+        transform: translateX(0) scale(.55);
+    }
+
+    to {
+        transform: translateX(calc(100vw + 260px)) scale(.55);
+    }
+}
+
+
+/* =========================
+   FLOATING LIGHTS
+========================= */
+
+.light {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.75);
+
+    animation:
+        floatLight 5s ease-in-out infinite;
+}
+
+.l1 {
+    top: 21%;
+    left: 18%;
+}
+
+.l2 {
+    top: 36%;
+    right: 17%;
+    animation-delay: 1s;
+}
+
+.l3 {
+    bottom: 28%;
+    left: 17%;
+    animation-delay: 2s;
+}
+
+.l4 {
+    bottom: 20%;
+    right: 20%;
+    animation-delay: .5s;
+}
+
+.l5 {
+    top: 52%;
+    left: 9%;
+    width: 3px;
+    height: 3px;
+    animation-delay: 1.8s;
+}
+
+@keyframes floatLight {
+
+    0%,100% {
+        opacity: .2;
+        transform: translateY(0) scale(.7);
+    }
+
+    50% {
+        opacity: .9;
+        transform: translateY(-15px) scale(1.2);
+    }
+}
+
+
+/* =========================
+   APP
+========================= */
+
+.app {
+    position: relative;
+
+    width: 100%;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        max(16px, env(safe-area-inset-top))
+        15px
+        max(16px, env(safe-area-inset-bottom));
+}
+
+
+/* =========================
+   SLIDER
+========================= */
+
+.slider {
+    position: relative;
+
+    width: 100%;
+    max-width: 390px;
+
+    height: min(
+        650px,
+        calc(100dvh - 60px)
+    );
+
+    overflow: hidden;
+
+    touch-action: pan-y;
+}
+
+.track {
+    display: flex;
+
+    width: 200%;
+    height: 100%;
+
+    transition:
+        transform .75s cubic-bezier(.77,0,.18,1);
+}
+
+.page {
+    width: 50%;
+    height: 100%;
+
+    flex-shrink: 0;
+
+    padding: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    padding:
+        34px
+        22px
+        22px;
+
+    border-radius: 29px;
+
+    background: rgba(255,255,255,.62);
+
+    border: 1px solid rgba(255,255,255,.8);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 22px 60px rgba(83,110,140,.12),
+        inset 0 1px 0 rgba(255,255,255,.82);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    animation:
+        cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+
+/* soft glow around card */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -100px;
+    left: -80px;
+
+    border-radius: 50%;
+
+    background: rgba(255,225,201,.3);
+
+    filter: blur(30px);
+
+    pointer-events: none;
+
+    animation:
+        glowMove 7s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+
+    from {
+        transform: translate(0,0);
+    }
+
+    to {
+        transform: translate(40px,30px);
+    }
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content {
+    width: 100%;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 0;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.eyebrow {
+    margin-bottom: 13px;
+
+    font-size: 11px;
+    letter-spacing: 1.8px;
+
+    color: #92a4b8;
+
+    opacity: 0;
+
+    animation:
+        fadeUp .8s .25s forwards;
+}
+
+h1 {
+    margin-bottom: 23px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 34px;
+    line-height: 1.12;
+
+    font-weight: 400;
+
+    color: #52677f;
+
+    opacity: 0;
+
+    animation:
+        fadeUp .9s .4s forwards;
+}
+
+h1 em {
+    color: #7c97b4;
+}
+
+.message {
+    width: 100%;
+    max-width: 310px;
+
+    font-size: 14px;
+    line-height: 1.78;
+
+    color: #66778a;
+
+    opacity: 0;
+
+    animation:
+        fadeUp 1s .58s forwards;
+}
+
+.tomorrow {
+    display: block;
+
+    margin-top: 5px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 17px;
+    line-height: 1.4;
+
+    color: #7089a4;
+}
+
+.message strong {
+    font-weight: 500;
+
+    color: #586e86;
+}
+
+
+/* =========================
+   SECOND PAGE ICON
+========================= */
+
+.icon {
+    width: 54px;
+    height: 54px;
+
+    margin-bottom: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.7);
+
+    box-shadow:
+        0 8px 25px rgba(92,120,150,.1);
+
+    font-size: 23px;
+
+    animation:
+        iconFloat 4s ease-in-out infinite,
+        iconAppear .8s .15s both;
+}
+
+@keyframes iconFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(2deg);
+    }
+}
+
+@keyframes iconAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================
+   FINAL LINE
+========================= */
+
+.final-line {
+    width: 82%;
+
+    margin-top: 20px;
+    padding-top: 16px;
+
+    border-top:
+        1px solid rgba(122,147,171,.17);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 17px;
+
+    font-style: italic;
+
+    color: #718aa4;
+
+    opacity: 0;
+
+    animation:
+        fadeUp 1s .8s forwards;
+}
+
+
+/* =========================
+   FADE UP
+========================= */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navigation {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 14px;
+
+    position: relative;
+    z-index: 5;
+}
+
+.nav-placeholder {
+    width: 72px;
+}
+
+.nav-btn {
+    border: none;
+    outline: none;
+
+    min-width: 72px;
+    height: 34px;
+
+    padding: 0 15px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.68);
+
+    border: 1px solid rgba(255,255,255,.72);
+
+    color: #71879e;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 11px;
+    letter-spacing: .4px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 16px rgba(91,117,145,.08);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(255,255,255,.9);
+}
+
+.nav-btn:active {
+    transform: scale(.91);
+}
+
+.dots {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 10px;
+
+    background: rgba(105,130,155,.2);
+
+    transition: .4s ease;
+}
+
+.dot.active {
+    width: 17px;
+
+    background: rgba(105,130,155,.55);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-height: 700px) {
+
+    .slider {
+        height: calc(100dvh - 45px);
+    }
+
+    .card {
+        padding:
+            27px
+            19px
+            17px;
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-bottom: 17px;
+    }
+
+    .message {
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .tomorrow {
+        font-size: 16px;
+    }
+
+    .icon {
+        width: 46px;
+        height: 46px;
+
+        margin-bottom: 12px;
+
+        font-size: 20px;
+    }
+
+    .final-line {
+        margin-top: 15px;
+        padding-top: 13px;
+
+        font-size: 16px;
+    }
+
+    .navigation {
+        margin-top: 10px;
+    }
+
+    .nav-btn {
+        height: 31px;
+        min-width: 68px;
+
+        font-size: 10px;
+    }
+}
+
+
+/* VERY SMALL */
+
+@media (max-width: 350px) {
+
+    .app {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .page {
+        padding: 5px;
+    }
+
+    .card {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .message {
+        font-size: 12.5px;
+    }
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     MORNING SKY
+========================= -->
+
+<div class="sky">
+
+    <div class="sun"></div>
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="cloud three"></div>
+
+    <div class="light l1"></div>
+    <div class="light l2"></div>
+    <div class="light l3"></div>
+    <div class="light l4"></div>
+    <div class="light l5"></div>
+
+</div>
+
+
+<!-- =========================
+     APP
+========================= -->
+
+<div class="app">
+
+    <div class="slider" id="slider">
+
+        <div class="track" id="track">
+
+
+            <!-- =====================
+                 PAGE 1
+            ====================== -->
+
+            <section class="page">
+
+                <div class="card">
+
+                    <div class="content">
+
+                        <div class="eyebrow">
+                            good morning, baby.
+                        </div>
+
+                        <h1>
+                            A little note<br>
+                            <em>for today.</em>
+                        </h1>
+
+                        <div class="message">
+
+                            Nothing special is supposed to happen today.<br><br>
+
+                            You have your day.<br>
+                            I have mine.<br>
+                            The world keeps moving like usual.<br><br>
+
+                            But somewhere between all the ordinary things,
+                            there's this tiny thought sitting quietly in my head:
+
+                            <span class="tomorrow">
+                                tomorrow,<br>
+                                I get to see you.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="navigation">
+
+                        <div class="nav-placeholder"></div>
+
+                        <div class="dots">
+
+                            <span
+                                class="dot active"
+                                id="dot1">
+                            </span>
+
+                            <span
+                                class="dot"
+                                id="dot2">
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="nav-btn"
+                            id="nextBtn">
+
+                            next →
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================
+                 PAGE 2
+            ====================== -->
+
+            <section class="page">
+
+                <div class="card">
+
+                    <div class="content">
+
+                        <div class="icon">
+                            🌤️
+                        </div>
+
+                        <div class="eyebrow">
+                            until tomorrow
+                        </div>
+
+                        <h1>
+                            Just take care<br>
+                            <em>of yourself.</em>
+                        </h1>
+
+                        <div class="message">
+
+                            So for today,<br>
+                            just eat well, drink enough water,<br>
+                            rest when you can,<br>
+                            and get through your day.<br><br>
+
+                            I'll be doing the same.<br><br>
+
+                            And then tomorrow…<br>
+
+                            <strong>
+                                no more “I miss you” through a screen. 🤍
+                            </strong>
+
+                        </div>
+
+                        <div class="final-line">
+                            See you tomorrow.
+                        </div>
+
+                    </div>
+
+
+                    <div class="navigation">
+
+                        <button
+                            class="nav-btn"
+                            id="backBtn">
+
+                            ← back
+
+                        </button>
+
+
+                        <div class="dots">
+
+                            <span
+                                class="dot"
+                                id="dot1b">
+                            </span>
+
+                            <span
+                                class="dot active"
+                                id="dot2b">
+                            </span>
+
+                        </div>
+
+
+                        <div class="nav-placeholder"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PAGE CONTROL
+========================= */
+
+const track =
+    document.getElementById("track");
+
+const slider =
+    document.getElementById("slider");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const backBtn =
+    document.getElementById("backBtn");
+
+const dot1 =
+    document.getElementById("dot1");
+
+const dot2 =
+    document.getElementById("dot2");
+
+const dot1b =
+    document.getElementById("dot1b");
+
+const dot2b =
+    document.getElementById("dot2b");
+
+let currentPage = 0;
+
+
+function goToPage(page) {
+
+    currentPage =
+        Math.max(0, Math.min(1, page));
+
+    track.style.transform =
+        `translateX(-${currentPage * 50}%)`;
+
+
+    dot1.classList.toggle(
+        "active",
+        currentPage === 0
+    );
+
+    dot2.classList.toggle(
+        "active",
+        currentPage === 1
+    );
+
+    dot1b.classList.toggle(
+        "active",
+        currentPage === 0
+    );
+
+    dot2b.classList.toggle(
+        "active",
+        currentPage === 1
+    );
+
+
+    /* restart content animations */
+
+    const activePage =
+        document.querySelectorAll(".page")[currentPage];
+
+    activePage
+        .querySelectorAll(
+            ".eyebrow, h1, .message, .final-line"
+        )
+        .forEach(element => {
+
+            element.style.animation = "none";
+
+            element.offsetHeight;
+
+            element.style.animation = "";
+
+        });
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+nextBtn.addEventListener(
+    "click",
+    () => goToPage(1)
+);
+
+backBtn.addEventListener(
+    "click",
+    () => goToPage(0)
+);
+
+
+/* =========================
+   SWIPE
+========================= */
+
+let startX = 0;
+let startY = 0;
+
+slider.addEventListener(
+    "touchstart",
+    function(e) {
+
+        startX =
+            e.touches[0].clientX;
+
+        startY =
+            e.touches[0].clientY;
+
+    },
+    { passive: true }
+);
+
+
+slider.addEventListener(
+    "touchend",
+    function(e) {
+
+        const endX =
+            e.changedTouches[0].clientX;
+
+        const endY =
+            e.changedTouches[0].clientY;
+
+        const diffX =
+            endX - startX;
+
+        const diffY =
+            endY - startY;
+
+
+        if (
+            Math.abs(diffX) > 45 &&
+            Math.abs(diffX) > Math.abs(diffY)
+        ) {
+
+            if (diffX < 0) {
+                goToPage(1);
+            }
+
+            else {
+                goToPage(0);
+            }
+
+        }
+
+    },
+    { passive: true }
+);
+
+
+/* =========================
+   DOTS
+========================= */
+
+dot1.addEventListener(
+    "click",
+    () => goToPage(0)
+);
+
+dot2.addEventListener(
+    "click",
+    () => goToPage(1)
+);
+
+dot1b.addEventListener(
+    "click",
+    () => goToPage(0)
+);
+
+dot2b.addEventListener(
+    "click",
+    () => goToPage(1)
+);
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(e) {
+
+        if (e.key === "ArrowRight") {
+            goToPage(1);
+        }
+
+        if (e.key === "ArrowLeft") {
+            goToPage(0);
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
