@@ -1,0 +1,1555 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Baby's Boarding Game ✈️</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --ink:#30434d;
+  --muted:#74858d;
+  --accent:#789faa;
+  --soft:#edf6f7;
+  --paper:rgba(255,255,255,.82);
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  color:var(--ink);
+
+  overflow-x:hidden;
+
+  background:
+
+    radial-gradient(
+      circle at 8% 8%,
+      #ffffff 0,
+      transparent 27%
+    ),
+
+    radial-gradient(
+      circle at 92% 20%,
+      #d8edf5 0,
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #dcecf4,
+      #ebe6f3 50%,
+      #f8e5e1
+    );
+}
+
+
+/* floating background */
+
+body::before,
+body::after{
+
+  content:"";
+
+  position:fixed;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  z-index:-1;
+
+}
+
+body::before{
+
+  width:240px;
+  height:240px;
+
+  top:-90px;
+  right:-90px;
+
+  background:
+    rgba(255,255,255,.65);
+
+}
+
+body::after{
+
+  width:210px;
+  height:210px;
+
+  bottom:-100px;
+  left:-100px;
+
+  background:
+    rgba(212,239,235,.7);
+
+}
+
+
+/* APP */
+
+.app{
+
+  width:min(94%,520px);
+
+  margin:auto;
+
+  padding:
+    18px
+    0
+    28px;
+
+}
+
+
+/* HEADER */
+
+.header{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:10px;
+
+}
+
+.gate{
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:1.8px;
+
+  padding:
+    7px
+    10px;
+
+  border-radius:50px;
+
+  background:
+    rgba(255,255,255,.68);
+
+  border:
+    1px solid white;
+
+}
+
+.page{
+
+  font-size:11px;
+
+  color:var(--muted);
+
+}
+
+
+/* CARD */
+
+.card{
+
+  min-height:620px;
+
+  padding:
+    27px
+    21px
+    21px;
+
+  border-radius:30px;
+
+  background:var(--paper);
+
+  border:
+    1px solid
+    rgba(255,255,255,.95);
+
+  box-shadow:
+    0 20px 55px
+    rgba(50,70,80,.13);
+
+  backdrop-filter:
+    blur(16px);
+
+  -webkit-backdrop-filter:
+    blur(16px);
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+
+/* SCREENS */
+
+.screen{
+
+  flex:1;
+
+  animation:
+    fade .35s ease;
+
+}
+
+@keyframes fade{
+
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+
+}
+
+.hidden{
+  display:none!important;
+}
+
+.center{
+  text-align:center;
+}
+
+
+/* TEXT */
+
+.eyebrow{
+
+  margin-top:8px;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:2px;
+
+  color:#79909a;
+
+}
+
+h1{
+
+  margin:
+    10px
+    0
+    12px;
+
+  font-family:Georgia,serif;
+
+  font-size:34px;
+
+  line-height:1.06;
+
+  font-weight:500;
+
+}
+
+h2{
+
+  margin:
+    8px
+    0
+    12px;
+
+  font-family:Georgia,serif;
+
+  font-size:27px;
+
+  line-height:1.1;
+
+  font-weight:500;
+
+}
+
+.subtitle{
+
+  color:var(--muted);
+
+  font-size:14px;
+
+  line-height:1.6;
+
+}
+
+
+/* PLANE */
+
+.plane{
+
+  display:inline-block;
+
+  font-size:55px;
+
+  animation:
+    float 2.8s
+    ease-in-out
+    infinite;
+
+}
+
+@keyframes float{
+
+  50%{
+
+    transform:
+      translateY(-8px)
+      rotate(2deg);
+
+  }
+
+}
+
+
+/* EMOJIS */
+
+.emoji-line{
+
+  margin:
+    18px
+    0;
+
+  font-size:25px;
+
+  letter-spacing:6px;
+
+}
+
+
+/* STORY BOX */
+
+.story{
+
+  margin-top:24px;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+    rgba(238,247,247,.85);
+
+  font-size:13px;
+
+  line-height:1.6;
+
+}
+
+
+/* BUTTONS */
+
+.primary{
+
+  width:100%;
+
+  border:0;
+
+  border-radius:17px;
+
+  padding:15px;
+
+  margin-top:18px;
+
+  background:#304b58;
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 9px 20px
+    rgba(48,75,88,.2);
+
+  transition:
+    transform .18s ease;
+
+}
+
+.primary:active{
+  transform:scale(.98);
+}
+
+
+/* QUESTIONS */
+
+.question{
+
+  margin:
+    27px
+    0
+    18px;
+
+  font-size:17px;
+
+  font-weight:700;
+
+  line-height:1.5;
+
+  text-align:center;
+
+}
+
+.options{
+
+  display:grid;
+
+  gap:10px;
+
+}
+
+.option{
+
+  width:100%;
+
+  border:
+    1px solid
+    #e0eaed;
+
+  border-radius:17px;
+
+  padding:15px;
+
+  background:
+    rgba(247,250,250,.92);
+
+  color:var(--ink);
+
+  text-align:left;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:
+    .18s ease;
+
+}
+
+.option:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 7px 17px
+    rgba(60,80,90,.1);
+
+}
+
+.option.selected{
+
+  background:#e2f0f2;
+
+  border-color:#9dc6cf;
+
+}
+
+
+/* RESULT */
+
+.result{
+
+  display:none;
+
+  margin-top:15px;
+
+  padding:16px;
+
+  border-radius:18px;
+
+  background:#faf3ee;
+
+  font-size:13px;
+
+  line-height:1.6;
+
+  animation:
+    pop .3s ease;
+
+}
+
+.result.show{
+  display:block;
+}
+
+@keyframes pop{
+
+  from{
+    opacity:0;
+    transform:scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+
+}
+
+
+/* NEXT */
+
+.next{
+  display:none;
+}
+
+.next.show{
+  display:block;
+}
+
+
+/* HINT */
+
+.hint{
+
+  margin-top:12px;
+
+  text-align:center;
+
+  font-size:11px;
+
+  color:#839198;
+
+}
+
+
+/* PROGRESS */
+
+.progress{
+
+  display:flex;
+
+  gap:5px;
+
+  margin-top:17px;
+
+}
+
+.progress span{
+
+  flex:1;
+
+  height:5px;
+
+  border-radius:10px;
+
+  background:#e1e8ea;
+
+}
+
+.progress span.active{
+  background:#82aab5;
+}
+
+.progress span.done{
+  background:#b7cfd4;
+}
+
+
+/* FOOTER */
+
+.footer{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:12px;
+
+}
+
+.footer button{
+
+  border:0;
+
+  background:transparent;
+
+  color:#657780;
+
+  font-size:11px;
+
+  cursor:pointer;
+
+}
+
+
+/* FISHBIN MESSAGE */
+
+.fishbin{
+
+  margin-top:20px;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,247,244,.9);
+
+  line-height:1.65;
+
+  font-size:13px;
+
+}
+
+.signature{
+
+  margin-top:13px;
+
+  font-family:Georgia,serif;
+
+  font-size:17px;
+
+}
+
+
+/* FINAL */
+
+.final-plane{
+
+  display:inline-block;
+
+  font-size:64px;
+
+  animation:
+    takeoff 2.2s
+    ease-in-out
+    infinite;
+
+}
+
+@keyframes takeoff{
+
+  50%{
+
+    transform:
+      translate(22px,-15px)
+      rotate(-5deg);
+
+  }
+
+}
+
+.sparkles{
+
+  margin:17px 0;
+
+  font-size:25px;
+
+  letter-spacing:7px;
+
+}
+
+.small-note{
+
+  margin-top:17px;
+
+  color:#7c8c92;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <div class="gate">
+      BABY'S BOARDING GAME
+    </div>
+
+    <div
+      class="page"
+      id="page"
+    >
+      READY
+    </div>
+
+  </div>
+
+
+  <main class="card">
+
+
+    <!-- ===================== -->
+    <!-- INTRO -->
+    <!-- ===================== -->
+
+    <section
+      class="screen center"
+      id="intro"
+    >
+
+      <div class="plane">
+        ✈️
+      </div>
+
+
+      <div class="eyebrow">
+        A LITTLE SOMETHING FROM FISHBIN
+      </div>
+
+
+      <h1>
+        Baby's<br>
+        Boarding Game
+      </h1>
+
+
+      <div class="subtitle">
+
+        Your flight isn't boarding yet.<br>
+
+        So Fishbin prepared you<br>
+        something to do while you wait. 🤍
+
+      </div>
+
+
+      <div class="emoji-line">
+        🎟️ 🧳 ☁️ 🐟 ✈️
+      </div>
+
+
+      <div class="story">
+
+        <b>Your mission is simple.</b>
+        <br><br>
+
+        Survive the airport.<br>
+        Have a little fun.<br>
+        Don't get too distracted.
+        <br><br>
+
+        And most importantly...
+
+        <br>
+
+        <b>
+          Keep coming closer to Fishbin. 🫶
+        </b>
+
+      </div>
+
+
+      <button
+        class="primary"
+        onclick="startGame()"
+      >
+
+        Start Your Little Adventure ✨
+
+      </button>
+
+
+    </section>
+
+
+
+    <!-- ===================== -->
+    <!-- GAME -->
+    <!-- ===================== -->
+
+    <section
+      class="screen hidden"
+      id="game"
+    ></section>
+
+
+
+    <!-- ===================== -->
+    <!-- FINAL -->
+    <!-- ===================== -->
+
+    <section
+      class="screen center hidden"
+      id="final"
+    >
+
+
+      <div class="final-plane">
+        ✈️
+      </div>
+
+
+      <div class="eyebrow">
+        BOARDING CLEARED
+      </div>
+
+
+      <h1>
+        Baby,<br>
+        You're Almost Here.
+      </h1>
+
+
+      <div class="sparkles">
+        ☁️ ✨ 🐟 ✨ ☁️
+      </div>
+
+
+      <div class="fishbin">
+
+        <b>A little message from Fishbin:</b>
+
+        <br><br>
+
+        You made it through the game.
+
+        <br><br>
+
+        Now there's only one thing left to do...
+
+        <br><br>
+
+        <b>
+          Come find me. 🤍
+        </b>
+
+        <div class="signature">
+          — Fishbin 🐟
+        </div>
+
+      </div>
+
+
+      <div class="small-note">
+
+        Your next destination:
+        <br>
+
+        <b>Fishbin's waiting spot. 🫶</b>
+
+      </div>
+
+
+      <button
+        class="primary"
+        onclick="restart()"
+      >
+
+        Play Again 🔄
+
+      </button>
+
+
+    </section>
+
+
+
+    <!-- PROGRESS -->
+
+    <div
+      class="progress"
+      id="progress"
+    ></div>
+
+
+  </main>
+
+
+
+  <div class="footer">
+
+    <button onclick="restart()">
+      ↻ Restart
+    </button>
+
+    <button onclick="skip()">
+      Skip →
+    </button>
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ===================================
+   BABY'S GAME CONTENT
+=================================== */
+
+
+const chapters = [
+
+  {
+
+    eyebrow:
+      "CHAPTER 01 · BEFORE YOU BOARD",
+
+    title:
+      "Pick Your Fate 🎴",
+
+    question:
+      "Baby, choose one. Don't ask what's behind it.",
+
+    options: [
+
+      "☁️ Cloud",
+
+      "🌙 Moon",
+
+      "✨ Star"
+
+    ],
+
+    results: [
+
+      "<b>Cloud ☁️</b><br><br>" +
+
+      "Your airport mission:<br>" +
+
+      "Look around and find something " +
+
+      "that reminds you of Fishbin.",
+
+      "<b>Moon 🌙</b><br><br>" +
+
+      "Your little mission:<br>" +
+
+      "Think of one thing you're secretly " +
+
+      "looking forward to when you arrive.",
+
+      "<b>Star ✨</b><br><br>" +
+
+      "Your mission:<br>" +
+
+      "Smile for absolutely no reason " +
+
+      "and blame Fishbin for it. 😌"
+
+    ]
+
+  },
+
+
+  {
+
+    eyebrow:
+      "CHAPTER 02 · KILL SOME TIME",
+
+    title:
+      "What Would Fishbin Do? 🐟",
+
+    question:
+      "What do you think Fishbin is doing while waiting for you?",
+
+    options: [
+
+      "😌 Pretending to be calm",
+
+      "⏰ Checking the time again",
+
+      "👀 Wondering where Baby is",
+
+      "😂 Probably all three"
+
+    ],
+
+    results: [
+
+      "Correct or not, Fishbin would probably deny it. 😌",
+
+      "Every five minutes feels suspiciously long today. ⏰",
+
+      "That answer may have been a little too accurate. 👀",
+
+      "Honestly... let's not investigate further. 😂"
+
+    ]
+
+  },
+
+
+  {
+
+    eyebrow:
+      "CHAPTER 03 · AIRPORT OBSERVATION",
+
+    title:
+      "Baby, Look Around 👀",
+
+    question:
+      "Choose today's tiny airport mission.",
+
+    options: [
+
+      "☁️ Find something blue",
+
+      "🍫 Find a snack",
+
+      "📸 Take a random photo",
+
+      "🧳 People-watch for 30 seconds"
+
+    ],
+
+    results: [
+
+      "Blue spotted. Mission accomplished. 💙",
+
+      "Important question: would Fishbin approve of the snack? 🍫",
+
+      "Photo evidence or it didn't happen. 📸",
+
+      "Airport people-watching: premium entertainment. 😂"
+
+    ]
+
+  },
+
+
+  {
+
+    eyebrow:
+      "CHAPTER 04 · A LITTLE CLOSER",
+
+    title:
+      "Choose Your Mood ☁️",
+
+    question:
+      "How are you feeling about coming to see Fishbin?",
+
+    options: [
+
+      "😌 Pretty chill",
+
+      "🙂 Quietly excited",
+
+      "👀 Very excited actually",
+
+      "🫠 Let's not talk about it"
+
+    ],
+
+    results: [
+
+      "Calm Baby. Suspicious. 😌",
+
+      "Quietly excited still counts. Fishbin knows. 🤍",
+
+      "Okay, okay. We see the excitement. 👀",
+
+      "Too late. You're already on your way. 🫠"
+
+    ]
+
+  },
+
+
+  {
+
+    eyebrow:
+      "CHAPTER 05 · TINY CHALLENGE",
+
+    title:
+      "Baby, Don't Smile 😏",
+
+    question:
+      "Read this without smiling:",
+
+    options: [
+
+      "“Fishbin is waiting for you.”",
+
+      "“You're getting closer.”",
+
+      "“I can't wait to see you.”"
+
+    ],
+
+    results: [
+
+      "If you smiled, Fishbin wins. 🐟",
+
+      "Yep. Closer and closer. ✈️",
+
+      "That one was supposed to stay in your head. 🫣"
+
+    ]
+
+  },
+
+
+  {
+
+    eyebrow:
+      "CHAPTER 06 · AIRPORT ROULETTE",
+
+    title:
+      "Pick Baby's Mission 🎲",
+
+    question:
+      "One last little mission before boarding.",
+
+    options: [
+
+      "🍫 Treat yourself",
+
+      "📸 Send Fishbin a photo",
+
+      "🎧 Put on a good song",
+
+      "☁️ Just sit and breathe"
+
+    ],
+
+    results: [
+
+      "<b>Treat yourself 🍫</b><br><br>" +
+
+      "Fishbin officially approves. " +
+
+      "Get yourself something nice.",
+
+      "<b>Photo mission 📸</b><br><br>" +
+
+      "Send Fishbin a completely random " +
+
+      "airport photo. Bonus points if it's silly.",
+
+      "<b>Music mission 🎧</b><br><br>" +
+
+      "Put on a song that feels like " +
+
+      "the beginning of an adventure.",
+
+      "<b>Soft mission ☁️</b><br><br>" +
+
+      "Take a breath.<br>" +
+
+      "You're doing fine.<br><br>" +
+
+      "And you're getting closer."
+
+    ]
+
+  },
+
+
+  {
+
+    eyebrow:
+      "FINAL CHAPTER · BEFORE YOU FLY",
+
+    title:
+      "One Last Question 🤍",
+
+    question:
+      "What's the first thing you want to do when you finally see Fishbin?",
+
+    options: [
+
+      "🫶 Just say hi",
+
+      "😂 Make a joke",
+
+      "👀 Look at Fishbin first",
+
+      "🤍 Something else"
+
+    ],
+
+    results: [
+
+      "Simple. But somehow that might be enough. 🤍",
+
+      "Of course you would. Fishbin is prepared. 😂",
+
+      "Okay, Baby. Don't make Fishbin nervous now. 👀",
+
+      "Now Fishbin is curious. Very curious. 🫣"
+
+    ]
+
+  }
+
+];
+
+
+let current = 0;
+
+let answered = false;
+
+
+
+/* ===================================
+   START
+=================================== */
+
+
+function startGame(){
+
+  document
+    .getElementById("intro")
+    .classList.add("hidden");
+
+  document
+    .getElementById("final")
+    .classList.add("hidden");
+
+  document
+    .getElementById("game")
+    .classList.remove("hidden");
+
+  current = 0;
+
+  renderGame();
+
+}
+
+
+
+/* ===================================
+   RENDER
+=================================== */
+
+
+function renderGame(){
+
+  answered = false;
+
+  const chapter =
+    chapters[current];
+
+
+  document
+    .getElementById("page")
+    .textContent =
+      `${current + 1} / ${chapters.length}`;
+
+
+  const game =
+    document.getElementById("game");
+
+
+  game.innerHTML = `
+
+    <div class="center">
+
+      <div class="eyebrow">
+        ${chapter.eyebrow}
+      </div>
+
+      <h2>
+        ${chapter.title}
+      </h2>
+
+      <div class="question">
+        ${chapter.question}
+      </div>
+
+    </div>
+
+
+    <div class="options">
+
+      ${chapter.options
+        .map(
+          (option,index)=>`
+
+            <button
+              class="option"
+              onclick="choose(${index})"
+            >
+              ${option}
+            </button>
+
+          `
+        )
+        .join("")}
+
+    </div>
+
+
+    <div
+      class="result"
+      id="result"
+    ></div>
+
+
+    <button
+      class="primary next"
+      id="next"
+      onclick="nextChapter()"
+    >
+
+      ${
+        current === chapters.length - 1
+        ? "Finish the Game ✨"
+        : "Next →"
+      }
+
+    </button>
+
+
+    <div class="hint">
+
+      No wrong answers.
+      Fishbin won't judge. Probably. 😌
+
+    </div>
+
+  `;
+
+
+  updateProgress();
+
+}
+
+
+
+/* ===================================
+   CHOOSE
+=================================== */
+
+
+function choose(index){
+
+  if(answered) return;
+
+  answered = true;
+
+
+  const buttons =
+    document.querySelectorAll(".option");
+
+
+  buttons[index]
+    .classList
+    .add("selected");
+
+
+  const result =
+    document.getElementById("result");
+
+
+  result.innerHTML =
+    chapters[current].results[index];
+
+
+  result.classList.add("show");
+
+
+  document
+    .getElementById("next")
+    .classList
+    .add("show");
+
+}
+
+
+
+/* ===================================
+   NEXT
+=================================== */
+
+
+function nextChapter(){
+
+  if(current < chapters.length - 1){
+
+    current++;
+
+    renderGame();
+
+  }
+
+  else{
+
+    document
+      .getElementById("game")
+      .classList
+      .add("hidden");
+
+
+    document
+      .getElementById("final")
+      .classList
+      .remove("hidden");
+
+
+    document
+      .getElementById("page")
+      .textContent = "✓";
+
+
+    updateProgress(true);
+
+  }
+
+}
+
+
+
+/* ===================================
+   PROGRESS
+=================================== */
+
+
+function updateProgress(done=false){
+
+  const progress =
+    document.getElementById("progress");
+
+
+  progress.innerHTML =
+
+    chapters
+      .map((_,index)=>{
+
+        let className = "";
+
+
+        if(
+          done ||
+          index < current
+        ){
+
+          className = "done";
+
+        }
+
+
+        if(
+          !done &&
+          index === current
+        ){
+
+          className = "active";
+
+        }
+
+
+        return `
+          <span class="${className}"></span>
+        `;
+
+      })
+      .join("");
+
+}
+
+
+
+/* ===================================
+   SKIP
+=================================== */
+
+
+function skip(){
+
+  const game =
+    document.getElementById("game");
+
+
+  if(
+    game.classList.contains("hidden")
+  ){
+
+    return;
+
+  }
+
+
+  nextChapter();
+
+}
+
+
+
+/* ===================================
+   RESTART
+=================================== */
+
+
+function restart(){
+
+  current = 0;
+
+
+  document
+    .getElementById("game")
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById("final")
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById("intro")
+    .classList
+    .remove("hidden");
+
+
+  document
+    .getElementById("page")
+    .textContent = "READY";
+
+
+  updateProgress();
+
+}
+
+
+/* INIT */
+
+updateProgress();
+
+</script>
+
+</body>
+</html>
+```
