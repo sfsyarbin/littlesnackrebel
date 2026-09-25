@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>A Little Morning Note ☀️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(
+          180deg,
+          #dceef8 0%,
+          #edf6fa 48%,
+          #faf7f1 100%
+        );
+      color: #42586a;
+      overflow-x: hidden;
+    }
+
+    /* ---------- SKY ---------- */
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .sun {
+      position: absolute;
+      width: 62px;
+      height: 62px;
+      top: 7%;
+      right: 9%;
+      border-radius: 50%;
+      background: #ffe8a9;
+      box-shadow: 0 0 45px rgba(255, 226, 153, 0.55);
+      animation: sunGlow 4s ease-in-out infinite;
+    }
+
+    .cloud {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 34px;
+      animation: cloudMove 8s ease-in-out infinite;
+    }
+
+    .cloud.one {
+      top: 13%;
+      left: 7%;
+    }
+
+    .cloud.two {
+      top: 29%;
+      right: 2%;
+      font-size: 27px;
+      animation-delay: 2s;
+    }
+
+    /* ---------- MAIN ---------- */
+
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 390px;
+      padding: 34px 24px 30px;
+      border-radius: 28px;
+
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      box-shadow:
+        0 20px 60px rgba(62, 89, 108, 0.12);
+
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 42px;
+      margin-bottom: 14px;
+      animation: float 3.5s ease-in-out infinite;
+    }
+
+    .small-title {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #91a2af;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 29px;
+      font-weight: 500;
+      color: #304b61;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #788b9a;
+      margin-bottom: 25px;
+    }
+
+    /* ---------- BUTTON ---------- */
+
+    .open-btn {
+      border: none;
+      outline: none;
+
+      padding: 13px 22px;
+      border-radius: 30px;
+
+      background: #3c607a;
+      color: #ffffff;
+
+      font-size: 12px;
+      letter-spacing: 0.4px;
+
+      cursor: pointer;
+
+      box-shadow: 0 8px 20px rgba(60, 96, 122, 0.18);
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .open-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* ---------- NOTE ---------- */
+
+    .note {
+      display: none;
+      text-align: left;
+      margin-top: 24px;
+
+      padding: 23px 20px;
+
+      border-radius: 20px;
+
+      background: rgba(250, 252, 253, 0.9);
+
+      animation: reveal 0.7s ease forwards;
+    }
+
+    .note p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #526879;
+      margin-bottom: 16px;
+    }
+
+    .note .hello {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      color: #304b61;
+      margin-bottom: 18px;
+    }
+
+    .note .ending {
+      margin-top: 20px;
+      margin-bottom: 0;
+      color: #365a75;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+    }
+
+    /* ---------- DESSERT ---------- */
+
+    .dessert-box {
+      margin: 18px 0 20px;
+      padding: 14px 12px;
+
+      background: #fff8ed;
+      border-radius: 16px;
+
+      text-align: center;
+
+      border: 1px solid rgba(231, 211, 179, 0.35);
+    }
+
+    .dessert-title {
+      font-size: 10px;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      color: #9b8a73;
+      margin-bottom: 7px;
+    }
+
+    .dessert {
+      font-size: 13px;
+      color: #756654;
+      line-height: 1.6;
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    .footer {
+      margin-top: 24px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #9baab4;
+    }
+
+    /* ---------- FLOATING ELEMENTS ---------- */
+
+    .float-item {
+      position: fixed;
+      bottom: -30px;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      z-index: 1;
+
+      animation: rise 6s linear forwards;
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+
+    @keyframes sunGlow {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.85;
+      }
+
+      50% {
+        transform: scale(1.07);
+        opacity: 1;
+      }
+    }
+
+    @keyframes cloudMove {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(15px);
+      }
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes rise {
+      0% {
+        transform:
+          translateY(0)
+          rotate(0deg);
+
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.65;
+      }
+
+      100% {
+        transform:
+          translateY(-110vh)
+          rotate(12deg);
+
+        opacity: 0;
+      }
+    }
+
+    /* ---------- SMALL PHONES ---------- */
+
+    @media (max-width: 360px) {
+
+      .page {
+        padding: 20px 14px;
+      }
+
+      .card {
+        padding: 28px 19px 25px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .note {
+        padding: 20px 17px;
+      }
+
+      .note p {
+        font-size: 13.5px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Background -->
+
+  <div class="sky">
+    <div class="sun"></div>
+    <div class="cloud one">☁︎</div>
+    <div class="cloud two">☁︎</div>
+  </div>
+
+  <!-- Main -->
+
+  <main class="page">
+
+```
+<section class="card">
+
+  <div class="icon">☀️</div>
+
+  <div class="small-title">
+    a quiet morning note
+  </div>
+
+  <h1>
+    Good morning, baby
+  </h1>
+
+  <p class="subtitle">
+    No plans today.<br>
+    Just rest, recover, and take it slow.
+  </p>
+
+  <button
+    class="open-btn"
+    onclick="openNote()"
+    id="openButton"
+  >
+    open your little note
+  </button>
+
+  <!-- Message -->
+  <div class="note" id="note">
+
+    <p class="hello">
+      Good morning, baby ☀️
+    </p>
+
+    <p>
+      Since today is a little rest day for you,
+      please take it slow and let yourself get some proper rest.
+    </p>
+
+    <p>
+      I’m glad you’re feeling a little better.
+      Stay warm, drink plenty of water,
+      take little breaks, and don’t push yourself too much, okay?
+    </p>
+
+    <div class="dessert-box">
+
+      <div class="dessert-title">
+        a little reminder
+      </div>
+
+      <div class="dessert">
+        🍰 Your cheesecake<br>
+        🍪 Your Dubai chewy cookie
+      </div>
+
+    </div>
+
+    <p>
+      They’re still waiting for you.
+      I think today might be a pretty good day
+      to finally eat them.
+    </p>
+
+    <p>
+      Rest well, feel better,
+      and know that I’m here missing you. 💙
+    </p>
+
+    <p class="ending">
+      Have a soft little day. 🤍
+    </p>
+
+  </div>
+
+  <div class="footer">
+    from fishbin, with care ♡
+  </div>
+
+</section>
+```
+
+  </main>
+
+  <script>
+
+    function openNote() {
+
+      const note = document.getElementById("note");
+      const button = document.getElementById("openButton");
+
+      note.style.display = "block";
+      button.style.display = "none";
+
+      createFloatingItems();
+    }
+
+    function createFloatingItems() {
+
+      const items = [
+        "💙",
+        "🤍",
+        "✨",
+        "☁︎"
+      ];
+
+      for (let i = 0; i < 10; i++) {
+
+        const item = document.createElement("div");
+
+        item.className = "float-item";
+
+        item.textContent =
+          items[Math.floor(Math.random() * items.length)];
+
+        item.style.left =
+          Math.random() * 100 + "vw";
+
+        item.style.fontSize =
+          (12 + Math.random() * 9) + "px";
+
+        item.style.animationDelay =
+          (Math.random() * 2) + "s";
+
+        document.body.appendChild(item);
+
+        setTimeout(() => {
+          item.remove();
+        }, 8000);
+
+      }
+    }
+
+  </script>
+
+</body>
+</html>
