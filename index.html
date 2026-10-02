@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f0ea" />
+  <title>Our Little Month</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f4f0ea;
+      --paper: #faf8f4;
+      --ink: #383530;
+      --muted: #8b837a;
+      --soft: #b89a88;
+      --line: rgba(56, 53, 48, 0.12);
+      --blue: #71838a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .035;
+      z-index: 10;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.6'/%3E%3C/svg%3E");
+    }
+
+    .page {
+      width: min(100% - 32px, 760px);
+      margin: auto;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      padding: 8vh 10px 6vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--soft);
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-center {
+      margin: auto;
+      max-width: 650px;
+    }
+
+    .hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(65px, 15vw, 125px);
+      font-weight: 400;
+      line-height: .78;
+      letter-spacing: -.055em;
+      animation: fadeUp 1.2s .1s ease both;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-style: italic;
+      color: var(--soft);
+    }
+
+    .hero-sub {
+      max-width: 410px;
+      margin: 38px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+      animation: fadeUp 1.4s .2s ease both;
+    }
+
+    .scroll {
+      font-size: 9px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      animation: breathe 2.5s infinite ease-in-out;
+    }
+
+    /* INTRO */
+
+    section {
+      padding: 105px 22px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .label {
+      font-size: 9px;
+      letter-spacing: .27em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .intro-text {
+      max-width: 580px;
+      margin: auto;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(28px, 6vw, 42px);
+      line-height: 1.25;
+    }
+
+    .intro-text em {
+      color: var(--blue);
+      font-style: italic;
+    }
+
+    /* OUR MONTH */
+
+    .month {
+      background: var(--paper);
+      margin: 0 -16px;
+      padding-left: 38px;
+      padding-right: 38px;
+    }
+
+    .month-inner {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .month-heading {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 9vw, 67px);
+      line-height: .95;
+      font-weight: 400;
+      margin-bottom: 50px;
+    }
+
+    .month-heading small {
+      display: block;
+      font-family: "DM Sans", sans-serif;
+      font-size: 9px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 16px;
+    }
+
+    .month-copy {
+      color: #5f5a54;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .month-copy p {
+      margin-bottom: 23px;
+    }
+
+    /* LITTLE THINGS */
+
+    .things {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .things-heading {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 45px;
+    }
+
+    .things-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+
+    .thing {
+      padding: 30px 20px 30px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .thing:nth-child(odd) {
+      border-right: 1px solid var(--line);
+      padding-right: 28px;
+    }
+
+    .thing:nth-child(even) {
+      padding-left: 28px;
+    }
+
+    .thing-number {
+      color: var(--soft);
+      font-size: 9px;
+      letter-spacing: .2em;
+      margin-bottom: 12px;
+    }
+
+    .thing h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 7px;
+    }
+
+    .thing p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* DISTANCE */
+
+    .distance {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    .distance-inner {
+      max-width: 610px;
+      margin: auto;
+    }
+
+    .route {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 17px;
+      margin: 35px 0 50px;
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .route-line {
+      width: 90px;
+      height: 1px;
+      background: var(--line);
+      position: relative;
+    }
+
+    .route-line::after {
+      content: "•";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -55%);
+      background: var(--bg);
+      padding: 0 9px;
+      color: var(--soft);
+    }
+
+    .distance h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(43px, 9vw, 70px);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .distance h2 em {
+      display: block;
+      color: var(--soft);
+    }
+
+    .distance-copy {
+      max-width: 450px;
+      margin: 30px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* LETTER */
+
+    .letter-section {
+      background: #383530;
+      color: #f5f0e9;
+      margin: 0 -16px;
+      padding-left: 38px;
+      padding-right: 38px;
+    }
+
+    .letter {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .letter .label {
+      color: rgba(245,240,233,.45);
+    }
+
+    .letter h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 9vw, 68px);
+      font-weight: 400;
+      line-height: .95;
+      margin-bottom: 48px;
+    }
+
+    .letter-body {
+      color: rgba(245,240,233,.74);
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .letter-body p {
+      margin-bottom: 23px;
+    }
+
+    .letter-body .highlight {
+      color: #f5f0e9;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(26px, 5vw, 35px);
+      line-height: 1.3;
+      margin: 42px 0;
+    }
+
+    .signature {
+      margin-top: 48px;
+      color: #f5f0e9;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
+      font-style: italic;
+    }
+
+    /* END */
+
+    .ending {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .ending-inner {
+      max-width: 560px;
+    }
+
+    .ending h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(48px, 10vw, 80px);
+      font-weight: 400;
+      line-height: .95;
+    }
+
+    .ending h2 span {
+      display: block;
+      color: var(--soft);
+      font-style: italic;
+    }
+
+    .ending p {
+      margin: 30px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+      max-width: 390px;
+    }
+
+    .heart {
+      margin-top: 40px;
+      color: var(--soft);
+      font-size: 20px;
+      animation: breathe 2.5s infinite ease-in-out;
+    }
+
+    footer {
+      padding: 25px 0 35px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    /* ANIMATIONS */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 1s ease,
+        transform 1s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        opacity: .4;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 560px) {
+
+      .page {
+        width: min(100% - 24px, 760px);
+      }
+
+      section {
+        padding: 85px 18px;
+      }
+
+      .hero {
+        padding-top: 7vh;
+      }
+
+      .month,
+      .letter-section {
+        margin-left: -12px;
+        margin-right: -12px;
+        padding-left: 26px;
+        padding-right: 26px;
+      }
+
+      .things-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .thing,
+      .thing:nth-child(odd),
+      .thing:nth-child(even) {
+        border-right: none;
+        padding: 25px 0;
+      }
+
+      .thing:last-child {
+        border-bottom: none;
+      }
+
+      .route-line {
+        width: 55px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <div class="eyebrow">
+        October 2026
+      </div>
+
+      <div class="hero-center">
+        <h1>
+          Our little
+          <span>month.</span>
+        </h1>
+
+        <p class="hero-sub">
+          After all the calls, the distance, the waiting,
+          and all those little moments we wished we could share
+          in the same place...
+        </p>
+      </div>
+
+      <div class="scroll">
+        a little further ↓
+      </div>
+    </section>
+
+
+    <!-- INTRO -->
+
+    <section class="center">
+      <div class="reveal">
+
+        <div class="label">
+          So, here we are.
+        </div>
+
+        <div class="intro-text">
+          For the next month,
+          you're not someone I only get to
+          <em>miss from a distance.</em>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- OUR MONTH -->
+
+    <section class="month">
+      <div class="month-inner reveal">
+
+        <h2 class="month-heading">
+          <small>For the next little while</small>
+          You're here.
+        </h2>
+
+        <div class="month-copy">
+
+          <p>
+            And honestly, baby, I don't think I've fully realised
+            how happy that makes me.
+          </p>
+
+          <p>
+            After spending so much time talking through a screen,
+            it's a little strange in the nicest way to know that
+            I can actually turn around and find you there.
+          </p>
+
+          <p>
+            No waiting for the next call.
+            No saying goodnight and going back to our own places.
+            No wishing you were here when something happens
+            that I want to tell you about.
+          </p>
+
+          <p>
+            You're just... here.
+          </p>
+
+          <p>
+            And I really, really like that.
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- LITTLE THINGS -->
+
+    <section>
+      <div class="things reveal">
+
+        <div class="label">
+          The things I'm looking forward to
+        </div>
+
+        <h2 class="things-heading">
+          Not just the big moments.
+        </h2>
+
+        <div class="things-grid">
+
+          <div class="thing">
+            <div class="thing-number">01</div>
+            <h3>Waking up</h3>
+            <p>
+              Opening my eyes and remembering you're actually
+              right there. Not on my phone.
+            </p>
+          </div>
+
+          <div class="thing">
+            <div class="thing-number">02</div>
+            <h3>Breakfasts</h3>
+            <p>
+              Slow mornings, random conversations,
+              and deciding what we're going to eat.
+            </p>
+          </div>
+
+          <div class="thing">
+            <div class="thing-number">03</div>
+            <h3>Your things</h3>
+            <p>
+              Seeing your stuff around the room and slowly
+              watching this place become a little more ours.
+            </p>
+          </div>
+
+          <div class="thing">
+            <div class="thing-number">04</div>
+            <h3>Doing nothing</h3>
+            <p>
+              Being in the same room without needing
+              to entertain each other every second.
+            </p>
+          </div>
+
+          <div class="thing">
+            <div class="thing-number">05</div>
+            <h3>Coming home</h3>
+            <p>
+              Knowing that at the end of the day,
+              there's someone here I want to see.
+            </p>
+          </div>
+
+          <div class="thing">
+            <div class="thing-number">06</div>
+            <h3>Being ourselves</h3>
+            <p>
+              The sleepy, hungry, clingy, annoying,
+              quiet, completely ordinary versions of us.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- DISTANCE -->
+
+    <section class="distance">
+      <div class="distance-inner reveal">
+
+        <div class="label">
+          Something I keep thinking about
+        </div>
+
+        <div class="route">
+          <span>Far away</span>
+          <div class="route-line"></div>
+          <span>Same place</span>
+        </div>
+
+        <h2>
+          We spent so much time
+          <em>wishing for this.</em>
+        </h2>
+
+        <p class="distance-copy">
+          So I don't want to rush through it.
+          I want to notice the little things.
+          The moments that probably won't look important
+          while they're happening, but somehow become
+          the ones we remember later.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- LETTER -->
+
+    <section class="letter-section">
+      <div class="letter reveal">
+
+        <div class="label">
+          For you, baby.
+        </div>
+
+        <h2>
+          I want this month
+          to feel like yours too.
+        </h2>
+
+        <div class="letter-body">
+
+          <p>
+            I want you to feel comfortable here.
+          </p>
+
+          <p>
+            Not like you're staying somewhere that isn't your's
+            but like, for this little while, this is our space too.
+            Leave your things wherwever they end up.
+            Take up space.
+            Get comfortable.
+            Be sleepy, quiet, clingy, distracted,
+            annoying, or completely yourself.
+          </p>
+
+          <p>
+            I want this place to slowly feel like our little corner of the world
+            even if it's only ours for a month.
+          </p>
+
+          <div class="highlight">
+            Because after spending so much time
+            missing you, I'm excited to finally
+            experience the everyday you.
+          </div>
+
+          <p>
+            Not just the version I get on our calls.
+            Not just the version we see on dates.
+          </p>
+
+          <p>
+            Just you.
+          </p>
+
+          <p>
+            Us, sharing the same space, doing ordinary things
+            and somehow making them feel like ours.
+          </p>
+
+          <p>
+            There will probably be sleepy mornings,
+            messy days, little disagreements,
+            and times when we're both doing our own thing.
+          </p>
+
+          <p>
+            And honestly?
+          </p>
+
+          <p>
+            I'm looking forward to those too.
+          </p>
+
+          <p>
+            I don't want a perfect month.
+          </p>
+
+          <p>
+            I just want a real one.
+          </p>
+
+          <p>
+            A month that, when it's over, leaves me
+            with a hundred tiny memories I didn't know
+            I'd end up keeping.
+          </p>
+
+          <div class="signature">
+            So... welcome here, baby.
+            <br><br>
+            I'm really, really happy you're here.
+            <br><br>
+            And if I seem a little too happy
+            about having you around...
+            <br>
+            well, you probably already know why. ♡
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ENDING -->
+
+    <section class="ending">
+      <div class="ending-inner reveal">
+
+        <div class="label">
+          Just for this little while
+        </div>
+
+        <h2>
+          Let's not make it
+          <span>perfect.</span>
+        </h2>
+
+        <p>
+          Let's make it ours.
+          The quiet mornings, the random plans,
+          the yoga, the gym
+          the lazy evenings, the little arguments,
+          the laughs, the food, the sleepy nights,
+          and all the things we haven't imagined yet.
+        </p>
+
+        <div class="heart">
+          ♡
+        </div>
+
+      </div>
+    </section>
+
+
+    <footer>
+      fishbin & baby lsr
+    </footer>
+
+  </main>
+
+
+  <script>
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
+
+</body>
+</html>
