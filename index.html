@@ -1,0 +1,326 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Note</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #faf8f5;
+    color: #393531;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .page {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 22px;
+  }
+
+  /* soft background light */
+  .glow {
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: #eee7df;
+    filter: blur(75px);
+    opacity: .5;
+    animation: breathe 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding: 43px 28px 38px;
+    text-align: center;
+
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 30px;
+
+    box-shadow:
+      0 20px 65px rgba(55,48,42,.08);
+
+    backdrop-filter: blur(14px);
+
+    animation: appear 1.2s ease forwards;
+  }
+
+  .eyebrow {
+    margin-bottom: 24px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #aaa29a;
+  }
+
+  h1 {
+    margin: 0 0 25px;
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 1.25;
+    color: #342f2b;
+  }
+
+  .intro {
+    max-width: 310px;
+    margin: 0 auto;
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: #766f68;
+  }
+
+  .intro strong {
+    font-weight: 500;
+    color: #5e5750;
+  }
+
+  /* little phrases */
+  .phrases {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 30px auto 0;
+    max-width: 315px;
+  }
+
+  .phrase {
+    padding: 12px 15px;
+    border-radius: 13px;
+    background: rgba(250,248,245,.8);
+    border: 1px solid #eee9e4;
+
+    font-family: Georgia, serif;
+    font-size: 14px;
+    color: #706961;
+
+    opacity: 0;
+    transform: translateY(8px);
+
+    animation: phraseIn .7s ease forwards;
+  }
+
+  .phrase:nth-child(1) { animation-delay: .65s; }
+  .phrase:nth-child(2) { animation-delay: .85s; }
+  .phrase:nth-child(3) { animation-delay: 1.05s; }
+  .phrase:nth-child(4) { animation-delay: 1.25s; }
+  .phrase:nth-child(5) { animation-delay: 1.45s; }
+  .phrase:nth-child(6) { animation-delay: 1.65s; }
+
+  .heart {
+    display: inline-block;
+    margin-top: 28px;
+    font-size: 19px;
+    color: #9b8c82;
+    animation: heartbeat 3.5s ease-in-out infinite;
+  }
+
+  .footer {
+    margin-top: 22px;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    color: #b3aba3;
+  }
+
+  /* floating tiny stars */
+  .float {
+    position: fixed;
+    color: #c8beb5;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .one {
+    top: 17%;
+    left: 13%;
+    animation: floatUp 5s ease-in-out 1s infinite;
+  }
+
+  .two {
+    top: 28%;
+    right: 12%;
+    font-size: 8px;
+    animation: floatUp 5.5s ease-in-out 2.5s infinite;
+  }
+
+  .three {
+    bottom: 20%;
+    left: 17%;
+    font-size: 9px;
+    animation: floatUp 6s ease-in-out 3s infinite;
+  }
+
+  .four {
+    bottom: 16%;
+    right: 16%;
+    font-size: 7px;
+    animation: floatUp 5s ease-in-out .5s infinite;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(.98);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes phraseIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(.94);
+      opacity: .4;
+    }
+
+    50% {
+      transform: scale(1.08);
+      opacity: .62;
+    }
+  }
+
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.13);
+    }
+  }
+
+  @keyframes floatUp {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    25% {
+      opacity: .65;
+    }
+
+    70% {
+      opacity: .45;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  /* mobile */
+  @media (max-width: 380px) {
+    .page {
+      padding: 22px 17px;
+    }
+
+    .card {
+      padding: 36px 22px 32px;
+    }
+
+    h1 {
+      font-size: 29px;
+    }
+
+    .phrase {
+      font-size: 13px;
+      padding: 11px 12px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="glow"></div>
+
+  <div class="float one">✦</div>
+  <div class="float two">·</div>
+  <div class="float three">✦</div>
+  <div class="float four">·</div>
+
+  <div class="card">
+
+    <div class="eyebrow">
+      just so you know
+    </div>
+
+    <h1>
+      You don't have to<br>
+      be careful around me.
+    </h1>
+
+    <div class="intro">
+      <strong>You can tell me things.</strong><br>
+      Even the little ones.
+    </div>
+
+    <div class="phrases">
+
+      <div class="phrase">
+        “Can we do something different today?”
+      </div>
+
+      <div class="phrase">
+        “I don't really like this.”
+      </div>
+
+      <div class="phrase">
+        “I need some time alone.”
+      </div>
+
+      <div class="phrase">
+        “Can I ask you something?”
+      </div>
+
+      <div class="phrase">
+        “I want you to know something.”
+      </div>
+
+      <div class="phrase">
+        “I just want to be quiet for a bit.”
+      </div>
+
+    </div>
+
+    <div class="heart">♡</div>
+
+    <div class="footer">
+      no pressure · we'll figure it out as we go
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
