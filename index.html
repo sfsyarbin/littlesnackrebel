@@ -1,0 +1,695 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8f5f0">
+<title>A Little Something for Baby ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root {
+  --bg: #f8f5f0;
+  --paper: #fffdf9;
+  --ink: #403a35;
+  --muted: #8d837a;
+  --rose: #d99d98;
+  --rose-light: #f5e5e1;
+  --green: #9da995;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page {
+  width: min(100% - 32px, 430px);
+  margin: 0 auto;
+  padding: 30px 0 45px;
+}
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a9b79e;
+  margin-right: 6px;
+}
+
+.hero {
+  text-align: center;
+  padding: 43px 8px 28px;
+  animation: appear .8s ease both;
+}
+
+.illustration {
+  font-size: 43px;
+  display: inline-block;
+  margin-bottom: 18px;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.eyebrow {
+  color: var(--rose);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  font-weight: 700;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 10vw, 46px);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 13px 0 16px;
+}
+
+h1 em {
+  color: #c88984;
+  font-weight: 500;
+}
+
+.intro {
+  max-width: 310px;
+  margin: auto;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #827970;
+}
+
+.note {
+  background: var(--paper);
+  border: 1px solid #eee7de;
+  border-radius: 19px;
+  padding: 23px 22px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 28px #77634a08;
+}
+
+.note-label {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  color: var(--rose);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.note p {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 13px 0;
+}
+
+.signature {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 17px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 7px;
+}
+
+.section-sub {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 0 0 17px;
+}
+
+.mood-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.mood {
+  border: 1px solid #eee5dc;
+  background: var(--paper);
+  border-radius: 15px;
+  padding: 15px 5px 14px;
+  min-width: 0;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform .2s, background .2s, border-color .2s;
+}
+
+.mood:hover {
+  border-color: #dfb7b1;
+  background: #fffaf7;
+}
+
+.mood:active {
+  transform: scale(.96);
+}
+
+.emoji {
+  display: block;
+  font-size: 23px;
+  margin-bottom: 9px;
+}
+
+.mood span:last-child {
+  display: block;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.message-box {
+  display: none;
+  margin-top: 12px;
+  background: var(--rose-light);
+  border-radius: 14px;
+  padding: 17px;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.message-box.show {
+  display: block;
+  animation: appear .35s ease both;
+}
+
+.activity {
+  margin-top: 32px;
+  background: #e9ede5;
+  border-radius: 19px;
+  padding: 23px 18px;
+}
+
+.activity .section-title {
+  font-size: 24px;
+}
+
+.activity .section-sub {
+  margin-bottom: 19px;
+}
+
+.activity .mood {
+  border-color: #dfe5da;
+  background: #f8faf6;
+}
+
+.activity .mood:hover {
+  border-color: #a9b79e;
+  background: white;
+}
+
+.task {
+  background: #ffffffb5;
+  padding: 17px;
+  border-radius: 13px;
+  margin-top: 15px;
+  font-size: 13px;
+  line-height: 1.9;
+  min-height: 83px;
+}
+
+.action {
+  border: none;
+  border-radius: 50px;
+  padding: 12px 17px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 13px;
+  transition: transform .2s, opacity .2s;
+}
+
+.action:active {
+  transform: scale(.97);
+}
+
+.action-green {
+  background: #64735d;
+  color: white;
+}
+
+.love-section {
+  text-align: center;
+  padding: 35px 12px 10px;
+}
+
+.love-section .section-title {
+  font-size: 26px;
+  margin-bottom: 9px;
+}
+
+.love-section p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.kiss {
+  display: inline-block;
+  font-size: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform .25s;
+}
+
+.kiss:active {
+  transform: scale(1.3) rotate(-10deg);
+}
+
+.kiss-message {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 27px;
+  color: #b67e79;
+}
+
+.footer {
+  text-align: center;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #aaa097;
+  margin-top: 32px;
+  letter-spacing: .5px;
+}
+
+.heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 5;
+  animation: rise 1.7s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(.8) rotate(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-120px) scale(1.4) rotate(20deg);
+  }
+}
+
+@media (max-width: 350px) {
+  .page {
+    width: calc(100% - 24px);
+  }
+
+  .mood-list {
+    gap: 6px;
+  }
+
+  .mood {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .mood span:last-child {
+    font-size: 10px;
+  }
+
+  .activity {
+    padding: 19px 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="page">
+
+  <div class="topline">
+    <span>♡ a little corner</span>
+    <span><i class="dot"></i>for my baby</span>
+  </div>
+
+  <header class="hero">
+    <div class="illustration">☁️</div>
+
+    <div class="eyebrow">for the hours i'm away</div>
+
+    <h1>
+      Hi, baby.<br>
+      <em>It's your day too.</em>
+    </h1>
+
+    <p class="intro">
+      While I'm off at work doing work things,
+      here's a tiny corner of the internet
+      that's just for you.
+    </p>
+  </header>
+
+  <section class="note">
+    <div class="note-label">a small reminder ♡</div>
+
+    <p>
+      I know I have to leave for work every day,
+      but I hope your days here still have
+      little things to look forward to.
+    </p>
+
+    <p>
+      You don't have to be productive all the time.
+      Eat something nice, get some rest,
+      find something fun, and be a little silly.
+    </p>
+
+    <div class="signature">
+      I'll be home before you know it. ♡
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">How's my baby doing?</h2>
+
+    <p class="section-sub">
+      Pick whichever feels most like you right now.
+    </p>
+
+    <div class="mood-list">
+      <button class="mood" onclick="showMood('bored')">
+        <span class="emoji">🫠</span>
+        <span>A little bored</span>
+      </button>
+
+      <button class="mood" onclick="showMood('miss')">
+        <span class="emoji">🥺</span>
+        <span>Missing me</span>
+      </button>
+
+      <button class="mood" onclick="showMood('tired')">
+        <span class="emoji">😴</span>
+        <span>Feeling lazy</span>
+      </button>
+    </div>
+
+    <div
+      class="message-box"
+      id="moodMessage"
+      aria-live="polite"
+    ></div>
+  </section>
+
+  <section class="activity">
+    <div class="eyebrow">a tiny side quest</div>
+
+    <h2 class="section-title">What are we up to today?</h2>
+
+    <p class="section-sub">
+      Pick your little adventure, baby. No pressure,
+      just things that might make today a bit more fun.
+    </p>
+
+    <div class="mood-list">
+      <button class="mood" onclick="pickActivity('groceries')">
+        <span class="emoji">🛒</span>
+        <span>Little grocery run</span>
+      </button>
+
+      <button class="mood" onclick="pickActivity('gym')">
+        <span class="emoji">🏃🏻</span>
+        <span>Gym / treadmill</span>
+      </button>
+
+      <button class="mood" onclick="pickActivity('photo')">
+        <span class="emoji">📸</span>
+        <span>Send me a pic</span>
+      </button>
+
+      <button class="mood" onclick="pickActivity('kindle')">
+        <span class="emoji">📚</span>
+        <span>Kindle time</span>
+      </button>
+
+      <button class="mood" onclick="pickActivity('netflix')">
+        <span class="emoji">🍿</span>
+        <span>Netflix & chill</span>
+      </button>
+
+      <button class="mood" onclick="pickActivity('random')">
+        <span class="emoji">🎲</span>
+        <span>Surprise me</span>
+      </button>
+    </div>
+
+    <div class="task" id="task" aria-live="polite">
+      Your day, your pace. Pick something that sounds nice. ♡
+    </div>
+
+    <button class="action action-green" onclick="newTask()">
+      Another little idea ↗
+    </button>
+  </section>
+
+  <section class="love-section">
+    <h2 class="section-title">One last thing...</h2>
+
+    <p>
+      In case I haven't given you enough kisses
+      before leaving today.
+    </p>
+
+    <button
+      class="kiss"
+      onclick="sendKiss()"
+      aria-label="Send a kiss"
+    >
+      💋
+    </button>
+
+    <div class="kiss-message" id="kissMessage" aria-live="polite">
+      tap for a little something
+    </div>
+  </section>
+
+  <footer class="footer">
+    MADE WITH LOVE, FISHBIN ♡
+  </footer>
+
+</main>
+
+<script>
+const moods = {
+  bored: [
+    "Baby, let's get you out of that boredom a little. Put on a song, make a snack, or find something random to do. You can always tell me about it later. I like hearing about your little adventures. ♡",
+
+    "Today's mission: do one thing you wouldn't normally do. Make a new drink, rearrange a tiny corner, or go outside for a bit. The world is still yours to explore, baby."
+  ],
+
+  miss: [
+    "I miss you too, even when I'm busy and terrible at checking my phone. Just imagine me stealing a quick hug from you in between all these meetings. I'll be back with you later. ♡",
+
+    "Consider this your official reminder that you're loved even when we're doing separate things. Save me a story for later, okay? I want to hear how your day went."
+  ],
+
+  tired: [
+    "Then take it easy, baby. You don't have to turn every quiet day into an achievement. Have some water, eat something, get comfy. Rest counts too. ♡",
+
+    "Permission to be a sleepy little creature today: granted. No need to feel guilty about taking a break. Just make sure you've eaten something proper, please."
+  ]
+};
+
+function showMood(mood) {
+  const options = moods[mood];
+  const index = Math.floor(Math.random() * options.length);
+  const box = document.getElementById("moodMessage");
+
+  box.classList.remove("show");
+  void box.offsetWidth;
+
+  box.textContent = options[index];
+  box.classList.add("show");
+}
+
+const activities = {
+  groceries: [
+    "🛒 Grocery run! Get whatever we need, maybe find a little treat for yourself too. Send me a pic if you spot something interesting.",
+
+    "🥐 Mission: stock up on the good stuff. And please don't come home with snacks we didn't plan for. Actually, never mind. Get the snacks."
+  ],
+
+  gym: [
+    "🏃🏻 Gym or treadmill time! Even a little movement counts. Put on your favourite playlist and go at your own pace. Proud of you for showing up, baby. ♡",
+
+    "💪 A little workout, a little sweat, then a nice shower and some well-earned rest. That's the plan. No need to go beast mode."
+  ],
+
+  photo: [
+    "📸 Send me a random photo from your day. Your coffee, your outfit, the view, your face, literally anything. I like seeing little pieces of your day.",
+
+    "🤳 Today's assignment: send me a picture I wasn't expecting. Cute, silly, blurry, unhinged. All submissions welcome. I miss seeing your face."
+  ],
+
+  kindle: [
+    "📚 Kindle and a comfy spot. Read a few pages, get lost in another world, and tell me if you find a sentence you love.",
+
+    "☕ Make a drink, get cosy, and read for a bit. Bonus points if you forget to check your phone because the book is that good."
+  ],
+
+  netflix: [
+    "🍿 Netflix time! Pick something good, get your snacks ready, and save me your review. No spoilers, baby. I might want to watch it with you.",
+
+    "📺 Today's agenda: one episode that somehow turns into three. I will not be held responsible. Just remember to eat something proper too."
+  ],
+
+  random: [
+    "🌤️ Go somewhere you've never bothered to visit nearby. A new café, a little shop, or just a different walking route. Bring back a tiny story for me.",
+
+    "🎧 Put on a song you haven't heard in ages, make your favourite drink, and let nostalgia do its thing.",
+
+    "🍦 Go find yourself a little treat. No special occasion required. You being you is enough of a reason.",
+
+    "🧸 Have a proper slow day. Fresh sheets, a comfy outfit, a good snack, and absolutely no unnecessary obligations.",
+
+    "💌 Send me a voice note telling me the most random thing you thought about today. I want the unfiltered baby lore.",
+
+    "🌿 Get some fresh air, take a little walk, and send me a photo of something that caught your eye.",
+
+    "🧩 Find a little puzzle, play a game, or try something new. Give your brain a tiny adventure today.",
+
+    "🍳 Make something you've never cooked before. It can be ridiculously simple. Bonus points for sending me the results."
+  ]
+};
+
+const previousActivity = {};
+
+function pickActivity(category) {
+  const options = activities[category];
+
+  let index = Math.floor(Math.random() * options.length);
+
+  if (
+    options.length > 1 &&
+    index === previousActivity[category]
+  ) {
+    index = (index + 1) % options.length;
+  }
+
+  previousActivity[category] = index;
+  showTask(options[index]);
+}
+
+function showTask(message) {
+  const task = document.getElementById("task");
+
+  task.style.animation = "none";
+  void task.offsetWidth;
+
+  task.textContent = message;
+  task.style.animation = "appear .35s ease both";
+}
+
+function newTask() {
+  const categories = Object.keys(activities);
+
+  const category = categories[
+    Math.floor(Math.random() * categories.length)
+  ];
+
+  pickActivity(category);
+}
+
+const kisses = [
+  "one for your forehead. ♡",
+  "one for those cheeks. mwah!",
+  "saving the real ones for later.",
+  "okay, maybe one more. 💋",
+  "consider yourself kissed, baby.",
+  "a little reminder: you're my favourite.",
+  "now imagine me hugging you from behind."
+];
+
+function sendKiss() {
+  const message = kisses[
+    Math.floor(Math.random() * kisses.length)
+  ];
+
+  document.getElementById("kissMessage").textContent = message;
+
+  const symbols = ["♡", "♥", "💕", "✿"];
+  const colors = ["#d99d98", "#bd9aab", "#c4aa83"];
+
+  for (let i = 0; i < 5; i++) {
+    const heart = document.createElement("span");
+
+    heart.className = "heart";
+    heart.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    heart.style.left = (35 + Math.random() * 30) + "vw";
+    heart.style.top = (65 + Math.random() * 15) + "vh";
+    heart.style.fontSize = (14 + Math.random() * 16) + "px";
+    heart.style.color =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1800);
+  }
+}
+</script>
+
+</body>
+</html>
