@@ -1,0 +1,653 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11131b">
+  <title>Same Songs. New Memories.</title>
+
+  <style>
+    :root {
+      --bg: #10121a;
+      --panel: rgba(255,255,255,.065);
+      --line: rgba(255,255,255,.13);
+      --text: #f4f0e9;
+      --muted: #aaa9b4;
+      --pink: #e9a9b9;
+      --blue: #9db8e8;
+      --gold: #e8d2a2;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 15% 8%, rgba(157,184,232,.17), transparent 34rem),
+        radial-gradient(ellipse at 85% 34%, rgba(233,169,185,.13), transparent 30rem),
+        linear-gradient(160deg, #11131b, #191927 55%, #10121a);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .35;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, #fff 99%, transparent),
+        radial-gradient(1px 1px at 76% 12%, #fff 99%, transparent),
+        radial-gradient(1px 1px at 48% 42%, #fff 99%, transparent),
+        radial-gradient(1px 1px at 88% 72%, #fff 99%, transparent),
+        radial-gradient(1px 1px at 22% 83%, #fff 99%, transparent);
+      background-size: 240px 220px;
+    }
+
+    .wrap {
+      width: min(920px, calc(100% - 36px));
+      margin: auto;
+      position: relative;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 26px 0;
+    }
+
+    .mark {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .tiny {
+      color: var(--pink);
+      font-size: .75rem;
+      letter-spacing: .12em;
+    }
+
+    .hero {
+      min-height: 76vh;
+      display: grid;
+      align-content: center;
+      padding: 54px 0 72px;
+    }
+
+    .eyebrow {
+      color: var(--pink);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-size: .7rem;
+    }
+
+    h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 400;
+      font-size: clamp(3.5rem, 10vw, 7.8rem);
+      line-height: .9;
+      letter-spacing: -.065em;
+      margin: 22px 0;
+      max-width: 850px;
+    }
+
+    h1 em {
+      color: var(--pink);
+      font-weight: 400;
+    }
+
+    .intro {
+      color: #c6c3cd;
+      max-width: 570px;
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 27px 0 0;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 14px;
+      color: #d5d2dc;
+      font-size: .76rem;
+      background: rgba(255,255,255,.035);
+    }
+
+    .count-wrap {
+      margin: 10px 0 70px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 18px;
+    }
+
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 25px;
+      backdrop-filter: blur(14px);
+    }
+
+    .section-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .66rem;
+    }
+
+    .countdown {
+      display: flex;
+      gap: clamp(10px, 3vw, 25px);
+      margin-top: 20px;
+    }
+
+    .unit strong {
+      display: block;
+      font: 400 clamp(2rem, 5vw, 3.4rem)/1 Georgia, serif;
+    }
+
+    .unit span {
+      color: var(--muted);
+      font-size: .64rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .note {
+      color: #d4d0db;
+      line-height: 1.8;
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+    }
+
+    .note b {
+      color: var(--pink);
+      font-weight: 400;
+    }
+
+    .divider {
+      width: 52px;
+      height: 1px;
+      background: var(--pink);
+      margin: 20px 0;
+    }
+
+    .section {
+      padding: 30px 0 72px;
+    }
+
+    h2 {
+      font: 400 clamp(2rem, 5vw, 3.5rem)/1.05 Georgia, serif;
+      letter-spacing: -.04em;
+      margin: 13px 0 24px;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .story-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .story-copy p {
+      color: #c6c3cd;
+      line-height: 1.9;
+      margin: 0 0 14px;
+    }
+
+    .quote {
+      font: italic 1.35rem/1.6 Georgia, serif;
+      color: #f0dbe1;
+      margin-top: 12px;
+    }
+
+    .moments {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+      margin-top: 20px;
+    }
+
+    .moment {
+      min-height: 175px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .num {
+      color: var(--pink);
+      font: italic 1.45rem Georgia, serif;
+    }
+
+    .moment h3 {
+      font: 400 1.25rem Georgia, serif;
+      margin: 18px 0 8px;
+    }
+
+    .moment p {
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .ticket-area {
+      padding: 25px 0 90px;
+    }
+
+    .ticket {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(233,169,185,.45);
+      border-radius: 24px;
+      padding: 30px;
+      background: linear-gradient(
+        125deg,
+        rgba(233,169,185,.12),
+        rgba(157,184,232,.09)
+      );
+    }
+
+    .ticket::after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      right: -65px;
+      top: -95px;
+      box-shadow:
+        0 0 0 22px rgba(255,255,255,.025),
+        0 0 0 44px rgba(255,255,255,.02);
+      pointer-events: none;
+    }
+
+    .ticket-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: start;
+    }
+
+    .ticket h2 {
+      margin: 12px 0 8px;
+    }
+
+    .ticket p {
+      color: #cbc7d2;
+      line-height: 1.8;
+      max-width: 590px;
+    }
+
+    .serial {
+      color: var(--gold);
+      font-size: .68rem;
+      letter-spacing: .18em;
+    }
+
+    button {
+      border: 1px solid rgba(233,169,185,.55);
+      color: var(--text);
+      background: rgba(233,169,185,.12);
+      border-radius: 999px;
+      padding: 13px 19px;
+      cursor: pointer;
+      font: inherit;
+      font-size: .82rem;
+      transition: transform .2s, background .2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: rgba(233,169,185,.2);
+    }
+
+    .reveal {
+      display: none;
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px dashed rgba(255,255,255,.25);
+      font: italic 1.2rem/1.8 Georgia, serif;
+      color: #f3dce2;
+      max-width: 680px;
+    }
+
+    .reveal.show {
+      display: block;
+      animation: fade .7s ease both;
+    }
+
+    footer {
+      text-align: center;
+      padding: 0 0 36px;
+      color: #888895;
+      font-size: .72rem;
+      letter-spacing: .08em;
+    }
+
+    footer span {
+      color: var(--pink);
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width:680px) {
+      .count-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .moments {
+        grid-template-columns: 1fr;
+      }
+
+      .moment {
+        min-height: 135px;
+      }
+
+      .hero {
+        min-height: 68vh;
+      }
+
+      header {
+        padding: 20px 0;
+      }
+
+      .ticket {
+        padding: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="wrap">
+
+  <header>
+    <div class="mark">birthday gift&#x20;</div>
+    <div class="tiny">STILL CELEBRATING YOU ♡</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">a little birthday something, for you</div>
+
+    <h1>
+      same songs.<br>
+      <em>new</em> memories.
+    </h1>
+
+    <p class="intro">
+      Your birthday may have passed, but I still wanted to give you
+      something to look forward to.
+
+      It still feels a little unreal that, somewhere along the way,
+      we found out we were listening to the same music.
+      Now we get to hear it live, together.
+
+      A little belated birthday gift, and a memory waiting to happen.
+    </p>
+
+    <div class="meta">
+      <span class="chip">MEN I TRUST · LIVE</span>
+      <span class="chip">NOVEMBER 12, 2026</span>
+      <span class="chip">OUR FIRST ONE TOGETHER ♡</span>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="count-wrap">
+
+    <div class="glass">
+      <div class="section-label">
+        counting down to your birthday gift
+      </div>
+
+      <div class="countdown" id="countdown">
+        <div class="unit"><strong>--</strong><span>days</span></div>
+        <div class="unit"><strong>--</strong><span>hours</span></div>
+        <div class="unit"><strong>--</strong><span>minutes</span></div>
+        <div class="unit"><strong>--</strong><span>seconds</span></div>
+      </div>
+    </div>
+
+    <div class="glass">
+      <div class="section-label">one thing i know</div>
+      <div class="divider"></div>
+
+      <div class="note">
+        The best part won't be the crowd or the setlist.<br>
+        It'll be <b>having you next to me.</b>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- OXFORD STORY -->
+  <section class="section">
+    <div class="eyebrow">a little rewind</div>
+    <h2>Somewhere in Oxford.</h2>
+
+    <div class="story">
+      <div class="glass story-copy">
+
+        <p>
+          One of my favourite moments from that trip was our morning
+          walk in Oxford. Just the two of us, the city slowly waking up,
+          and that song playing along with us.
+        </p>
+
+        <p>
+          I don't think we knew then that we'd end up here,
+          our first Men I Trust concert together.
+        </p>
+
+        <div class="quote">
+          “I hope this will always be a beautiful memory you'll carry with you.”
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPECTATIONS -->
+  <section class="section">
+    <div class="eyebrow">what i'm looking forward to</div>
+    <h2>Not just the setlist.</h2>
+
+    <div class="moments">
+
+      <article class="glass moment">
+        <div class="num">01 / before</div>
+        <div>
+          <h3>The anticipation</h3>
+          <p>
+            Getting there, finding our spot, and that first little
+            rush when the music starts.
+          </p>
+        </div>
+      </article>
+
+      <article class="glass moment">
+        <div class="num">02 / during</div>
+        <div>
+          <h3>Our kind of loud</h3>
+          <p>
+            All those familiar songs, now filling the air around us.
+            You right there beside me.
+          </p>
+        </div>
+      </article>
+
+      <article class="glass moment">
+        <div class="num">03 / after</div>
+        <div>
+          <h3>The afterglow</h3>
+          <p>
+            Talking about our favourite parts, replaying the night,
+            and keeping it for later.
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BIRTHDAY GIFT -->
+  <section class="ticket-area">
+    <div class="ticket">
+
+      <div class="ticket-top">
+        <div>
+          <div class="serial">
+            ADMIT TWO · ONE VERY GOOD MEMORY
+          </div>
+
+          <h2>My favourite plus-one.</h2>
+
+          <p>
+            A little late for your birthday, but right on time
+            for a new memory.
+
+            Your first Men I Trust show. Our first concert together.
+
+            I hope it feels special, not because everything has
+            to be perfect, but because we get to be there at the
+            same time, in the same place, listening to music
+            that already means something to us.
+          </p>
+        </div>
+
+        <div class="tiny">✦ 001</div>
+      </div>
+
+      <button id="revealBtn" type="button">
+        there's a little note for you ↗
+      </button>
+
+      <div class="reveal" id="revealNote">
+
+        I know this comes a little after your birthday,
+        but I hope you know that celebrating you doesn't
+        have to be limited to just one day.<br><br>
+
+        You deserve beautiful things, little surprises,
+        and countless reasons to smile, not just on your
+        birthday, but on all the ordinary days in between.<br><br>
+
+        I hope this little gift becomes one of those memories
+        you'll look back on and smile about.<br><br>
+
+        Here's to more songs, more places, more spontaneous
+        little adventures, and more moments with you.<br><br>
+
+        Happy belated birthday, Baby.
+        You deserve all the lovely things. 🤍<br><br>
+
+        <span style="
+          font-style:normal;
+          font-size:.84rem;
+          color:#c9b7c1;
+        ">
+          — Fishbin 🐟
+        </span>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    a little late for your birthday · right on time for us
+    <span>♡</span> · 12.11.26
+  </footer>
+
+</main>
+
+<script>
+  // Concert date: 12 November 2026, 19:00 local time.
+  // Change the time if the concert starts at a different hour.
+
+  const CONCERT_DATE = "2026-11-12T19:00:00";
+
+  const target = new Date(CONCERT_DATE).getTime();
+  const countdown = document.getElementById("countdown");
+
+  function tick() {
+    const distance = target - Date.now();
+
+    if (distance <= 0) {
+      countdown.innerHTML =
+        '<div class="note">It’s today. Let’s make it ours. ♡</div>';
+      return;
+    }
+
+    const values = [
+      Math.floor(distance / 86400000),
+      Math.floor((distance % 86400000) / 3600000),
+      Math.floor((distance % 3600000) / 60000),
+      Math.floor((distance % 60000) / 1000)
+    ];
+
+    const labels = [
+      "days",
+      "hours",
+      "minutes",
+      "seconds"
+    ];
+
+    countdown.innerHTML = values.map((v, i) =>
+      `<div class="unit">
+        <strong>${String(v).padStart(2, "0")}</strong>
+        <span>${labels[i]}</span>
+      </div>`
+    ).join("");
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  // Birthday note interaction
+  document.getElementById("revealBtn").addEventListener("click", () => {
+    const note = document.getElementById("revealNote");
+
+    note.classList.toggle("show");
+
+    document.getElementById("revealBtn").textContent =
+      note.classList.contains("show")
+        ? "keep this little note close ↗"
+        : "there's a little note for you ↗";
+  });
+</script>
+
+</body>
+</html>
