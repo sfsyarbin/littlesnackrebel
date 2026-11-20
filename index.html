@@ -1,0 +1,1157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171b35">
+
+  <title>Home Again, Baby ✦</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #171b35;
+      --navy-light: #222846;
+      --navy-soft: #303653;
+      --coral: #f5a58d;
+      --lavender: #c5b9ed;
+      --mint: #dce9e5;
+      --mint-dark: #58746d;
+      --paper: #f6f3ec;
+      --ink: #292d35;
+      --muted: #aaaec2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--paper);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    ::selection {
+      background: var(--coral);
+      color: var(--navy);
+    }
+
+    /* BACKGROUND */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .13;
+      animation: orbMove 14s ease-in-out infinite alternate;
+    }
+
+    .orb-a {
+      width: 300px;
+      height: 300px;
+      background: var(--lavender);
+      top: -150px;
+      right: -100px;
+    }
+
+    .orb-b {
+      width: 250px;
+      height: 250px;
+      background: var(--coral);
+      bottom: 5%;
+      left: -140px;
+      animation-delay: -6s;
+    }
+
+    @keyframes orbMove {
+      to {
+        transform: translate(35px, 45px) scale(1.2);
+      }
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      color: var(--lavender);
+      opacity: 0;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: .12;
+        transform: scale(.7) rotate(0);
+      }
+      50% {
+        opacity: .8;
+        transform: scale(1.15) rotate(35deg);
+      }
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      width: min(100% - 40px, 790px);
+      margin: auto;
+    }
+
+    /* COMMON */
+
+    .mono {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 9px;
+    }
+
+    .serif {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+    }
+
+    .coral {
+      color: var(--coral);
+    }
+
+    .lavender {
+      color: var(--lavender);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .85s ease, transform .85s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 75px 0;
+    }
+
+    .hero-content {
+      width: 100%;
+      animation: intro 1.2s ease both;
+    }
+
+    @keyframes intro {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .top-label {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid rgba(197,185,237,.35);
+      padding: 10px 15px;
+      border-radius: 30px;
+      color: var(--lavender);
+      margin-bottom: 40px;
+    }
+
+    .top-label span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 12px var(--coral);
+    }
+
+    .hero-plane {
+      font-size: 38px;
+      display: inline-block;
+      margin-bottom: 23px;
+      animation: planeFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes planeFloat {
+      0%, 100% {
+        transform: translate(0, 0) rotate(-8deg);
+      }
+      50% {
+        transform: translate(10px, -10px) rotate(2deg);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(53px, 11vw, 100px);
+      line-height: .98;
+      letter-spacing: -3px;
+      font-weight: 500;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: var(--coral);
+      font-weight: 400;
+      margin-top: 12px;
+    }
+
+    .hero-description {
+      max-width: 370px;
+      margin: 30px auto 0;
+      color: #b9bdd0;
+      font-size: 14px;
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    .hero-date {
+      margin-top: 45px;
+      color: var(--lavender);
+    }
+
+    .scroll {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      animation: scrollPulse 2s infinite;
+    }
+
+    @keyframes scrollPulse {
+      50% { opacity: .35; transform: translate(-50%, 6px); }
+    }
+
+    /* ROUTE */
+
+    .route-section {
+      padding: 65px 0 90px;
+    }
+
+    .route-card {
+      border: 1px solid rgba(197,185,237,.25);
+      border-radius: 18px;
+      padding: 30px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .route-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .route-heading .mono {
+      color: var(--muted);
+    }
+
+    .route-heading strong {
+      color: var(--coral);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .route-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .route-point {
+      min-width: 75px;
+    }
+
+    .route-point .code {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -1px;
+    }
+
+    .route-point small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .route-middle {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      height: 30px;
+    }
+
+    .route-middle::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      border-top: 1px dashed rgba(197,185,237,.55);
+    }
+
+    .route-middle span {
+      position: absolute;
+      left: 0;
+      top: -7px;
+      font-size: 17px;
+      animation: routeTravel 5s ease-in-out infinite;
+    }
+
+    @keyframes routeTravel {
+      0%, 100% { left: 0; }
+      50% { left: calc(100% - 20px); }
+    }
+
+    .route-caption {
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 30px;
+      line-height: 1.7;
+    }
+
+    /* LETTER */
+
+    .letter-section {
+      padding: 45px 0 100px;
+    }
+
+    .letter {
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 5px;
+      padding: clamp(30px, 7vw, 65px);
+      position: relative;
+      box-shadow: 12px 12px 0 rgba(197,185,237,.12);
+    }
+
+    .letter::after {
+      content: '✦';
+      position: absolute;
+      right: 30px;
+      top: 25px;
+      color: #d7b6a9;
+      font-size: 22px;
+    }
+
+    .letter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #a17b83;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .letter h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(38px, 8vw, 59px);
+      font-weight: 400;
+      line-height: 1.02;
+      margin-bottom: 32px;
+    }
+
+    .letter h2 em {
+      color: #c27e76;
+    }
+
+    .letter p {
+      font-size: 14px;
+      color: #64616a;
+      line-height: 2;
+      margin-bottom: 18px;
+    }
+
+    .letter strong {
+      color: #9e6869;
+      font-weight: 600;
+    }
+
+    .letter-sign {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 27px;
+      color: #c27e76;
+      margin-top: 30px;
+    }
+
+    /* SATE YAK */
+
+    .memory-section {
+      padding: 65px 0 100px;
+    }
+
+    .section-label {
+      color: var(--lavender);
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(39px, 8vw, 58px);
+      line-height: 1.05;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    .section-desc {
+      color: #aeb2c7;
+      font-size: 13px;
+      line-height: 1.9;
+      max-width: 420px;
+    }
+
+    .yak-card {
+      margin-top: 35px;
+      padding: 35px;
+      background: var(--navy-light);
+      border: 1px solid rgba(245,165,141,.25);
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .yak-card::after {
+      content: '🍢';
+      position: absolute;
+      font-size: 115px;
+      right: -10px;
+      bottom: -15px;
+      opacity: .13;
+      transform: rotate(-20deg);
+    }
+
+    .yak-icon {
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+
+    .yak-card h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 34px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .yak-card p {
+      max-width: 430px;
+      color: #b7bbcf;
+      font-size: 13px;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stamp {
+      display: inline-block;
+      border: 1px solid var(--coral);
+      color: var(--coral);
+      padding: 9px 13px;
+      margin-top: 22px;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      transform: rotate(-2deg);
+    }
+
+    /* REST */
+
+    .rest-section {
+      padding: 50px 0 100px;
+    }
+
+    .rest-card {
+      background: var(--mint);
+      color: #263e3a;
+      border-radius: 20px;
+      padding: clamp(35px, 7vw, 60px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rest-card::before {
+      content: '☁';
+      position: absolute;
+      font-size: 190px;
+      right: -20px;
+      top: -65px;
+      opacity: .12;
+    }
+
+    .rest-card .mono {
+      color: var(--mint-dark);
+      margin-bottom: 22px;
+    }
+
+    .rest-card h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(43px, 8vw, 65px);
+      line-height: .98;
+      font-weight: 400;
+      margin-bottom: 22px;
+    }
+
+    .rest-card p {
+      max-width: 440px;
+      color: #58746d;
+      font-size: 14px;
+      line-height: 1.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* CALL */
+
+    .call-section {
+      padding: 45px 0 100px;
+      text-align: center;
+    }
+
+    .call-box {
+      border: 1px solid rgba(197,185,237,.3);
+      border-radius: 20px;
+      padding: 40px 25px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .call-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .call-box h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(36px, 7vw, 50px);
+      font-weight: 400;
+      margin-bottom: 17px;
+    }
+
+    .call-box p {
+      color: #b4b8cb;
+      max-width: 430px;
+      margin: auto;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .hug-button {
+      background: var(--coral);
+      color: var(--navy);
+      border: none;
+      padding: 14px 22px;
+      border-radius: 40px;
+      margin-top: 28px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .hug-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(245,165,141,.2);
+    }
+
+    .hug-result {
+      color: var(--lavender);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 25px;
+      margin-top: 24px;
+      min-height: 30px;
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .hug-result.visible {
+      opacity: 1;
+    }
+
+    /* DECEMBER */
+
+    .december-section {
+      padding: 50px 0 110px;
+    }
+
+    .december-card {
+      background: linear-gradient(135deg, #303653, #252c49);
+      border: 1px solid rgba(197,185,237,.25);
+      padding: clamp(35px, 7vw, 60px);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .december-card::after {
+      content: '12';
+      position: absolute;
+      font-family: 'Instrument Serif', serif;
+      font-size: 210px;
+      line-height: 1;
+      color: rgba(255,255,255,.035);
+      right: -5px;
+      bottom: -35px;
+    }
+
+    .december-card .mono {
+      color: var(--coral);
+      margin-bottom: 25px;
+    }
+
+    .december-card h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(43px, 8vw, 67px);
+      font-weight: 400;
+      line-height: .98;
+      margin-bottom: 25px;
+    }
+
+    .december-card h2 em {
+      color: var(--coral);
+    }
+
+    .december-card p {
+      max-width: 450px;
+      color: #c0c4d5;
+      font-size: 13px;
+      line-height: 2;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .future-note {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 26px;
+      color: var(--lavender);
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding: 25px 20px 45px;
+      color: #9ca1b9;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    footer span {
+      color: var(--coral);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+      .container {
+        width: calc(100% - 34px);
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .route-card {
+        padding: 23px 18px;
+      }
+
+      .route-point .code {
+        font-size: 22px;
+      }
+
+      .route-point {
+        min-width: 60px;
+      }
+
+      .letter-section {
+        padding-top: 30px;
+      }
+
+      .letter {
+        padding: 35px 25px;
+      }
+
+      .letter p {
+        font-size: 13px;
+      }
+
+      .yak-card {
+        padding: 27px 23px;
+      }
+
+      .rest-section {
+        padding-top: 25px;
+      }
+
+      .scroll {
+        bottom: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="background">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+  </div>
+
+  <div class="stars" id="stars"></div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-content">
+
+        <div class="top-label mono">
+          <span></span>
+          THE JOURNEY BACK
+        </div>
+
+        <div class="hero-plane">✈</div>
+
+        <h1>
+          HOME
+          <span>again, baby.</span>
+        </h1>
+
+        <p class="hero-description">
+          The trip is over. The stories stay.
+          And someone here is really happy
+          that you're finally home.
+        </p>
+
+        <div class="hero-date mono">
+          AT LEAST THE DISTANCE BETWEEN US HAS BECOME SMALLER
+        </div>
+
+      </div>
+
+      <div class="scroll mono">
+        SCROLL TO OPEN ↓
+      </div>
+    </section>
+
+    <!-- ROUTE -->
+    <section class="route-section reveal">
+      <div class="container">
+        <div class="route-card">
+
+          <div class="route-heading">
+            <span class="mono">YOUR LITTLE JOURNEY</span>
+            <strong>TRIP COMPLETED ✓</strong>
+          </div>
+
+          <div class="route-line">
+
+            <div class="route-point">
+              <div class="code">CN</div>
+              <small>CHINA</small>
+            </div>
+
+            <div class="route-middle">
+              <span>✈</span>
+            </div>
+
+            <div class="route-point" style="text-align:right">
+              <div class="code">HOME</div>
+              <small>HUG FOR YOU</small>
+            </div>
+
+          </div>
+
+          <div class="route-caption">
+            One solo open trip, countless little stories.<br>
+            And now, a well-deserved rest.
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LETTER -->
+    <section class="letter-section reveal">
+      <div class="container">
+
+        <article class="letter">
+
+          <div class="letter-label">Baby / You're really cool</div>
+
+          <h2>
+            Dear baby,<br>
+            <em>you're finally home.</em>
+          </h2>
+
+          <p>
+            I know this China trip wasn't exactly what you had
+            hoped it would be. Between the unexpected situations,
+            the roommate, the itinerary, the hotel, and all those
+            tiring moments, I can imagine how much you just wanted
+            to get home.
+          </p>
+
+          <p>
+            Even though I wasn't there with you, I'm glad you
+            shared your little stories with me along the way.
+            The exciting ones, the frustrating ones, and everything
+            in between. I hope you know that you never have to
+            filter your feelings when talking to me.
+          </p>
+
+          <p>
+            I appreciate you letting me be part of your journey
+            from a distance. And I hope, in some little way,
+            knowing that someone was always here to listen made
+            those difficult days feel a little less lonely.
+          </p>
+
+          <p>
+            Not every trip turns out the way we imagine.
+            Sometimes the best thing we can take home isn't
+            a perfect holiday, but a few unexpected memories,
+            a little more experience, and stories we'll laugh
+            about someday.
+          </p>
+
+          <p>
+            And of course, we cannot forget the most important
+            discovery of this entire trip:
+            <strong>Sate Yak is actually delicious.</strong>
+            Hahahaha. At least China gave you that. 😂
+          </p>
+
+          <p>
+            Now I hope you can finally slow down.
+            Get comfortable, sleep properly, eat something you love,
+            and let yourself recover. You don't have to rush
+            into anything. You did an amazing job getting through this trip,
+            you were so patient and handled it all so well. Trully impressive!
+          </p>
+
+          <p>
+            One more thing, I'm so glad you're back.
+            The distance between us feels a little shorter now,
+            and that's already a lovely thing.
+          </p>
+
+          <div class="letter-sign">
+            Always here, always cheering for you. ♡
+          </div>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- SATE YAK -->
+    <section class="memory-section reveal">
+      <div class="container">
+
+        <div class="section-label mono">
+          UNEXPECTED TRAVEL HIGHLIGHT
+        </div>
+
+        <h2 class="section-title">
+          A trip to China.<br>
+          A discovery of Sate Yak.
+        </h2>
+
+        <p class="section-desc">
+          Among all the unexpected things that happened,
+          let's give a little appreciation to the one thing
+          that actually delivered.
+        </p>
+
+        <div class="yak-card">
+
+          <div class="yak-icon">🍢</div>
+
+          <h3>The Sate Yak Award</h3>
+
+          <p>
+            For outstanding performance during a rather
+            unpredictable holiday. Thank you for being
+            one of the few things that made this trip memorable.
+          </p>
+
+          <div class="stamp">
+            OFFICIALLY WORTH IT ✓
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- REST -->
+    <section class="rest-section reveal">
+      <div class="container">
+
+        <div class="rest-card">
+
+          <div class="mono">NOW PLAYING / REST MODE</div>
+
+          <h2>
+            No more<br>
+            rushing around.
+          </h2>
+
+          <p>
+            Take your time settling back at home.
+            Unpack tomorrow if you want, sleep a little longer,
+            have your favorite food, and do absolutely nothing
+            if that's what your body needs.
+          </p>
+
+          <p style="margin-top:16px">
+            You've had enough travel days for now.
+            Let home take care of you for a while.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- I'M HERE -->
+    <section class="call-section reveal">
+      <div class="container">
+
+        <div class="call-box">
+
+          <div class="call-icon">♡</div>
+
+          <h2>I'm just a call away.</h2>
+
+          <p>
+            Whenever you want to talk, tell me something random,
+            share a story, complain about your day, or simply
+            need someone to keep you company.
+            <br><br>
+            Call me anytime, baby. You don't need a reason.
+            I'm here, and I'd love to hear from you.
+          </p>
+
+          <button class="hug-button" id="hugButton">
+            Send me a little hug ✦
+          </button>
+
+          <div class="hug-result" id="hugResult">
+            Here's your hug. A long, warm one. 🤍
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DECEMBER -->
+    <section class="december-section reveal">
+      <div class="container">
+
+        <div class="december-card">
+
+          <div class="mono">NEXT DESTINATION / DECEMBER</div>
+
+          <h2>
+            Next stop:<br>
+            <em>you and me.</em>
+          </h2>
+
+          <p>
+            Now get some proper rest and save a little energy
+            for our December adventure.
+          </p>
+
+          <p>
+            I hope this next one feels different.
+            Better plans, lovely places, good food,
+            more laughter, and memories we get to make together.
+          </p>
+
+          <p>
+            But you know what? We don't even have to make
+            every day exciting. If we feel like exploring,
+            let's explore. If we're tired, we can just stay in,
+            slow down, and enjoy being there together.
+          </p>
+
+          <p>
+            No pressure to chase every destination.
+            No need to make every moment perfect.
+            We can make our own kind of adventure.
+          </p>
+
+          <div class="future-note">
+            I'll make sure our next adventure is a better one. ♡
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing-section reveal" style="padding:30px 0 100px;text-align:center;">
+      <div class="container">
+
+        <div style="font-size:35px;color:var(--coral);margin-bottom:20px;">
+          ✦
+        </div>
+
+        <h2 class="serif" style="font-size:clamp(40px,8vw,60px);font-weight:400;line-height:1.05;">
+          Welcome back,<br>
+          <em class="coral">my favorite person.</em>
+        </h2>
+
+        <p style="color:#aeb2c7;font-size:13px;line-height:1.9;max-width:350px;margin:22px auto 0;">
+          One trip down. More little adventures ahead.
+          For now, just be home and take good care of yourself.
+        </p>
+
+      </div>
+    </section>
+
+    <footer>
+      extra love, fishbin <span>🐟</span>
+    </footer>
+
+  </main>
+
+  <script>
+    // Subtle floating stars
+    const stars = document.getElementById('stars');
+    const starSymbols = ['✦', '✧', '·', '⋆'];
+
+    for (let i = 0; i < 30; i++) {
+      const star = document.createElement('span');
+
+      star.className = 'star';
+      star.textContent =
+        starSymbols[Math.floor(Math.random() * starSymbols.length)];
+
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.fontSize = (7 + Math.random() * 13) + 'px';
+      star.style.animationDelay = Math.random() * 5 + 's';
+      star.style.animationDuration = (3 + Math.random() * 4) + 's';
+
+      stars.appendChild(star);
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    document.querySelectorAll('.reveal').forEach(element => {
+      observer.observe(element);
+    });
+
+    // Virtual hug button
+    const hugButton = document.getElementById('hugButton');
+    const hugResult = document.getElementById('hugResult');
+
+    const hugMessages = [
+      "Here's your hug. A long, warm one. 🤍",
+      "A little squeeze from fishbin. 🐟",
+      "You deserve all the rest and hugs today. ♡",
+      "Sending extra love all the way to you. ✦"
+    ];
+
+    let hugCount = 0;
+
+    hugButton.addEventListener('click', () => {
+      hugResult.textContent =
+        hugMessages[hugCount % hugMessages.length];
+
+      hugResult.classList.add('visible');
+
+      hugButton.textContent = 'One more hug? ♡';
+
+      hugButton.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(.95)' },
+        { transform: 'scale(1)' }
+      ], {
+        duration: 250,
+        easing: 'ease-out'
+      });
+
+      hugCount++;
+    });
+  </script>
+
+</body>
+</html>
